@@ -1,0 +1,25 @@
+﻿@model IEnumerable<JinStore.Models.Student>
+@{
+    ViewBag.Title = "Students";
+}
+
+<h2>Students</h2>
+@if(ViewBag.UpdatedId !=null)
+{
+    <div class="alert alert-success">
+        <p>Record @ViewBag.UpdatedId successfully updated</p>
+    </div>
+}
+<table class="table">
+    @foreach(var student in Model)
+    {
+        <tr>
+            <td>@student.FirstName</td>
+            <td>@student.LastName</td>
+            <td>@student.DateOfBirth</td>
+            <td>@Html.ActionLink("Edit","Edit",new { id=student.ID},new { @class="btn"})</td>
+        </tr>
+    }
+
+
+</table>

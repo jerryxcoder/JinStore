@@ -1,0 +1,27 @@
+﻿@model IEnumerable<JinStore.Models.Product>
+@{
+    ViewBag.Title = "Products";
+}
+
+<h2>Products</h2>
+<script>
+
+</script>
+<table class="table">
+    <tr>
+        <td><b>Ticket ID</b></td>
+        <td><b>Ticket Class</b></td>
+        <td><b>Club Region</b></td>
+     </tr>
+    @foreach (var product in Model)
+    {
+        <tr>
+            <td>@product.TicketID</td>
+            <td>@product.Class</td>
+            <td>@product.Region</td>
+            <td>@Html.ActionLink("Edit","Edit", new { id = product.TicketID }, new { @class = "btn" })</td>
+        </tr>
+    }
+
+
+</table>
