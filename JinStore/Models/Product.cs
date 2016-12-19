@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations;
+
 
 namespace JinStore.Models
 {
@@ -12,7 +14,11 @@ namespace JinStore.Models
         public string FlightType { get; set; }
         public string From { get; set; }
         public string To { get; set; }
+        [Required]
+        [DataType(DataType.Date)]
         public string DePartureDate { get; set; }
+        [Required]
+        [DataType(DataType.Date)]
         public string ReturnDate { get; set; }
         public int AdultNum { get; set; }
         public int ChildNum { get; set; }

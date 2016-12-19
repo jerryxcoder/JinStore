@@ -5,7 +5,7 @@ angular.module("JinStore").controller("TripsController", ["$http", "$scope", fun
     $http.get('/trips.json').success(function (data) {
             $scope.trips = data;
     });
-
+    //* activate code below to alow api access
     //$http.get('/api/trips').success(function (data) {
     //    $scope.trips = data;
     //});

@@ -1,3 +1,31 @@
-﻿<div ng-controller="TripsController">
+﻿@using JinStore.Models
+@model Product
+
+@using (Html.BeginForm())
+{
+     <h2>Flight Search</h2>
+
+    
+    <div class="form-group input-group-sm">
+        @Html.LabelFor(model => model.DePartureDate)
+        @Html.TextBoxFor(model => model.DePartureDate, new { @class = "form-control datepicker", placeholder = "Enter Departure date here..." })
+        @Html.ValidationMessageFor(model => model.DePartureDate)
+    </div>
+
+    <div class="form-group input-group-sm">
+        @Html.LabelFor(model => model.ReturnDate)
+        @Html.TextBoxFor(model => model.ReturnDate, new { @class = "form-control datepicker", placeholder = "Enter Return date here..." })
+        @Html.ValidationMessageFor(model => model.ReturnDate)
+    </div>
+    <input type="submit" value="Submit Order" class="btn btn-primary" />
+}
+@section scripts{
+  <script type="text/javascript">
+    $(function () { // will trigger when the document is ready
+       $('.datepicker').datepicker(); //Initialise any date pickers
+    });
+</script>
+}
+@*<div ng-controller="TripsController">
     <div ng-init="getTrips()"></div>
-</div>
+</div>*@
