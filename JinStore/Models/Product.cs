@@ -25,5 +25,7 @@ namespace JinStore.Models
         public string Price { get; set; }
         public string Carrier { get; set; }
         public string FlightNumber { get; set; }
+
+       
     }
 }

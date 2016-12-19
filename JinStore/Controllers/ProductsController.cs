@@ -18,7 +18,10 @@ namespace JinStore.Controllers
 
         public ActionResult Index()
         {
+
+    
             return View();
+
         }
     }
 }

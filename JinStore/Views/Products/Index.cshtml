@@ -1,31 +1,81 @@
 ﻿@using JinStore.Models
 @model Product
+@{
+    List<SelectListItem> listItems = new List<SelectListItem>();
+    listItems.Add(new SelectListItem
+    {
+        Text = "ORD",
+        Value = "ORD"
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text = "LAX",
+        Value = "LAX",
+        
+    });
+    listItems.Add(new SelectListItem
+    {
+        Text = "JFK",
+        Value = "JFK"
+    });
+}
+
+@{
+    List<SelectListItem> PassengerNum = new List<SelectListItem>();
+    PassengerNum.Add(new SelectListItem
+    {
+        Text = "1",
+        Value = "1"
+    });
+    PassengerNum.Add(new SelectListItem
+    {
+        Text = "2",
+        Value = "2"
+
+    });
+    PassengerNum.Add(new SelectListItem
+    {
+        Text = "3",
+        Value = "3"
+    });
+}
 
 @using (Html.BeginForm())
 {
-     <h2>Flight Search</h2>
+    <h2>Flight Search</h2>
+    <div class="form-group input-group-sm">
+    @Html.DropDownListFor(model => model.From, listItems, "-- Select Origin --")
+    </div>
 
-    
+    <div class="form-group input-group-sm">
+        @Html.DropDownListFor(model => model.To, listItems, "-- Select Destination --")
+    </div>
+
     <div class="form-group input-group-sm">
         @Html.LabelFor(model => model.DePartureDate)
         @Html.TextBoxFor(model => model.DePartureDate, new { @class = "form-control datepicker", placeholder = "Enter Departure date here..." })
         @Html.ValidationMessageFor(model => model.DePartureDate)
     </div>
 
-    <div class="form-group input-group-sm">
-        @Html.LabelFor(model => model.ReturnDate)
-        @Html.TextBoxFor(model => model.ReturnDate, new { @class = "form-control datepicker", placeholder = "Enter Return date here..." })
-        @Html.ValidationMessageFor(model => model.ReturnDate)
-    </div>
-    <input type="submit" value="Submit Order" class="btn btn-primary" />
+        <div class="form-group input-group-sm">
+            @Html.LabelFor(model => model.ReturnDate)
+            @Html.TextBoxFor(model => model.ReturnDate, new { @class = "form-control datepicker", placeholder = "Enter Return date here..." })
+            @Html.ValidationMessageFor(model => model.ReturnDate)
+        </div>
+
+        <div class="form-group input-group-sm">
+            @Html.DropDownListFor(model => model.AdultNum, PassengerNum, "-- Select Number of Passenger --")
+        </div>
+
+        <input type="submit" value="Submit Order" class="btn btn-primary" />
 }
 @section scripts{
-  <script type="text/javascript">
-    $(function () { // will trigger when the document is ready
-       $('.datepicker').datepicker(); //Initialise any date pickers
-    });
-</script>
+    <script type="text/javascript">
+        $(function () { // will trigger when the document is ready
+            $('.datepicker').datepicker(); //Initialise any date pickers
+        });
+    </script>
 }
 @*<div ng-controller="TripsController">
-    <div ng-init="getTrips()"></div>
-</div>*@
+        <div ng-init="getTrips()"></div>
+    </div>*@
