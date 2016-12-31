@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Jin's Store</title>
+    <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -16,16 +16,15 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Jin's Store", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+
+                <a class="navbar-brand" href="@Url.Action("Index","Home")"><img src="~/img/logo.png" style="width:70px;height:30px;" /></a>
+                @*@Html.ActionLink("ZipLine", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Products", "Index", "Products")</li>
-                    <li>@Html.ActionLink("Students", "Index", "Students")</li>
-                    <li>@Html.ActionLink("Checkout", "Index", "Checkout")</li>
+                    <li>@Html.ActionLink("Flight", "Index", "Products")</li>
+                    <li>@Html.ActionLink("Member Login", "Index", "Checkout")</li>
                 </ul>
             </div>
         </div>
