@@ -22,3 +22,20 @@ select,
 textarea {
     max-width: 280px;
 }
+
+ 
+
+.jumbotronCustom {
+  height: 600px;
+  width:100%;
+  color: inherit;
+  background-color: none;
+  background-size:cover;
+  background-image:url("img/GoldenGate_BG.png");
+ }
+
+
+
+
+
+
