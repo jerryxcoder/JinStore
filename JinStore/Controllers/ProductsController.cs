@@ -11,6 +11,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 
 
+
 namespace JinStore.Controllers
 {
     public class ProductsController : Controller
@@ -18,10 +19,7 @@ namespace JinStore.Controllers
 
         public ActionResult Index()
         {
-
-    
             return View();
-
         }
     }
 }

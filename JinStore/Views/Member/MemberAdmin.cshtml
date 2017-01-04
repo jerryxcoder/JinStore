@@ -1,0 +1,17 @@
+﻿@model IEnumerable<JinStore.Models.Members>
+@{
+    ViewBag.Title="Member Admin";
+}
+<table class="table">
+    @foreach (var member in Model)
+    {
+        <tr>
+            <td>@member.id</td>
+            <td>@member.FirstName</td>
+            <td>@member.LastName</td>
+            <td>@Html.ActionLink("Edit", "Edit", new { id = member.id }, new { @class = "btn" })</td>
+        </tr>
+    }
+
+</table>
+
