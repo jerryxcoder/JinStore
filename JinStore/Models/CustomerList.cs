@@ -12,9 +12,12 @@ namespace JinStore.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class History
+    public partial class CustomerList
     {
-        public int Id { get; set; }
-        public string TicketID { get; set; }
+        public int ID { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public System.DateTime DateCreated { get; set; }
+        public System.DateTime DateLastModified { get; set; }
     }
 }

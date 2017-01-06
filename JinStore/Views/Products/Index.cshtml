@@ -1,26 +1,6 @@
 ﻿@using JinStore.Models
 @model Product
 @{
-    List<SelectListItem> listItems = new List<SelectListItem>();
-    listItems.Add(new SelectListItem
-    {
-        Text = "ORD",
-        Value = "ORD"
-    });
-    listItems.Add(new SelectListItem
-    {
-        Text = "LAX",
-        Value = "LAX",
-        
-    });
-    listItems.Add(new SelectListItem
-    {
-        Text = "JFK",
-        Value = "JFK"
-    });
-}
-
-@{
     List<SelectListItem> PassengerNum = new List<SelectListItem>();
     PassengerNum.Add(new SelectListItem
     {
@@ -38,44 +18,66 @@
         Text = "3",
         Value = "3"
     });
+    PassengerNum.Add(new SelectListItem
+    {
+        Text = "4",
+        Value = "4"
+    });
+    PassengerNum.Add(new SelectListItem
+    {
+        Text = "5",
+        Value = "5"
+    });
+    PassengerNum.Add(new SelectListItem
+    {
+        Text = "6",
+        Value = "6"
+    });
+
 }
-
-@using (Html.BeginForm())
-{
-    <h2>Flight Search</h2>
-    <div class="form-group input-group-sm">
-    @Html.DropDownListFor(model => model.From, listItems, "-- Select Origin --")
-    </div>
-
-    <div class="form-group input-group-sm">
-        @Html.DropDownListFor(model => model.To, listItems, "-- Select Destination --")
-    </div>
-
-    <div class="form-group input-group-sm">
-        @Html.LabelFor(model => model.DePartureDate)
-        @Html.TextBoxFor(model => model.DePartureDate, new { @class = "form-control datepicker", placeholder = "Enter Departure date here..." })
-        @Html.ValidationMessageFor(model => model.DePartureDate)
-    </div>
-
+<div ng-controller="TripsController" class="container">
+    <div ng-init="getTrips()"></div>
+    @using (Html.BeginForm("SearchResult", "Products", FormMethod.Post))
+    {
+        <h2>Flight Search</h2>
         <div class="form-group input-group-sm">
-            @Html.LabelFor(model => model.ReturnDate)
-            @Html.TextBoxFor(model => model.ReturnDate, new { @class = "form-control datepicker", placeholder = "Enter Return date here..." })
-            @Html.ValidationMessageFor(model => model.ReturnDate)
+            <select ng-model="departureCity" id="origin">
+                <option ng-repeat="city in trips.trips.data.city" value="{{city.code}}">{{city.name}}</option>
+                <option ng-repeat="airport in trips.trips.data.airport" value="{{airport.code}}">{{airport.name}}</option>
+            </select>
         </div>
 
         <div class="form-group input-group-sm">
-            @Html.DropDownListFor(model => model.AdultNum, PassengerNum, "-- Select Number of Passenger --")
+            <select ng-model="arrivalCity" id="destination">
+                <option ng-repeat="city in trips.trips.data.city" value="{{city.code}}">{{city.name}}</option>
+                <option ng-repeat="airport in trips.trips.data.airport" value="{{airport.code}}">{{airport.name}}</option>
+            </select>
         </div>
 
+        <div class="form-group input-group-sm">
+            @Html.LabelFor(model => model.departureTime)
+            @Html.TextBoxFor(model => model.departureTime, new { @class = "form-control datepicker", placeholder = "Enter Departure date here..." })
+            @Html.ValidationMessageFor(model => model.departureTime)
+        </div>
+
+        @*<div class="form-group input-group-sm">
+                @Html.LabelFor(model => model.ReturnDate)
+                @Html.TextBoxFor(model => model.ReturnDate, new { @class = "form-control datepicker", placeholder = "Enter Return date here..." })
+                @Html.ValidationMessageFor(model => model.ReturnDate)
+            </div>*@
+
+        <div class="form-group input-group-sm">
+            @Html.DropDownListFor(model => model.adultCount, PassengerNum, "-- Select Number of Passenger --")            
+        </div>
         <input type="submit" value="Submit Order" class="btn btn-primary" />
-}
-@section scripts{
-    <script type="text/javascript">
-        $(function () { // will trigger when the document is ready
-            $('.datepicker').datepicker(); //Initialise any date pickers
-        });
-    </script>
-}
-@*<div ng-controller="TripsController">
-        <div ng-init="getTrips()"></div>
-    </div>*@
+    }
+    @section scripts{
+        <script type="text/javascript">
+            $(function () { // will trigger when the document is ready
+                $('.datepicker').datepicker(); //Initialise any date pickers
+            });
+        </script>
+    }
+
+    
+</div>

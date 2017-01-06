@@ -1,18 +1,15 @@
-﻿
-@{
-    Layout = null;
+﻿@{ 
+    ViewBag.Title = "SearchResult";
 }
+<div ng-controller="TripsController" class="container">
+    <div ng-init="getTrips()"></div>
+    <table>
+        <tr ng-repeat="x in trips.trips.tripOption">
+            <td>{{x.id }}</td>
+            <td>{{x.slice[0].segment[0].flight.carrier }}</td>
+            <td>{{x.slice[0].segment[0].flight.number }}</td>
+            <td>{{x.saleTotal}}</td>
+        </tr>
+    </table>
+</div>
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>SearchResult</title>
-</head>
-<body>
-    <div> 
-
-     </div>
-</body>
-</html>

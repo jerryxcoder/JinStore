@@ -49,27 +49,27 @@
         {
             <h2>Flight Search</h2>
             <div class="form-group input-group-sm">
-                @Html.DropDownListFor(model => model.From, listItems, "-- Select Origin --")
+                @Html.DropDownListFor(model => model.origin, listItems, "-- Select Origin --")
             </div>
 
             <div class="form-group input-group-sm">
-                @Html.DropDownListFor(model => model.To, listItems, "-- Select Destination --")
+                @Html.DropDownListFor(model => model.destination, listItems, "-- Select Destination --")
             </div>
 
             <div class="form-group input-group-sm">
-                @Html.LabelFor(model => model.DePartureDate)
-                @Html.TextBoxFor(model => model.DePartureDate, new { @class = "form-control datepicker", placeholder = "Enter Departure date here..." })
-                @Html.ValidationMessageFor(model => model.DePartureDate)
+                @Html.LabelFor(model => model.departureTime)
+                @Html.TextBoxFor(model => model.departureTime, new { @class = "form-control datepicker", placeholder = "Enter Departure date here..." })
+                @Html.ValidationMessageFor(model => model.departureTime)
             </div>
 
-            <div class="form-group input-group-sm">
-                @Html.LabelFor(model => model.ReturnDate)
-                @Html.TextBoxFor(model => model.ReturnDate, new { @class = "form-control datepicker", placeholder = "Enter Return date here..." })
-                @Html.ValidationMessageFor(model => model.ReturnDate)
-            </div>
+            @*<div class="form-group input-group-sm">
+                    @Html.LabelFor(model => model.ReturnDate)
+                    @Html.TextBoxFor(model => model.ReturnDate, new { @class = "form-control datepicker", placeholder = "Enter Return date here..." })
+                    @Html.ValidationMessageFor(model => model.ReturnDate)
+                </div>*@
 
             <div class="form-group input-group-sm">
-                @Html.DropDownListFor(model => model.AdultNum, PassengerNum, "-- Select Number of Passenger --")
+                @Html.DropDownListFor(model => model.adultCount, PassengerNum, "-- Select Number of Passenger --")
             </div>
 
             <input type="submit" value="Submit Order" class="btn btn-primary" />

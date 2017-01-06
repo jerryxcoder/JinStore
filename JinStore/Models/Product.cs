@@ -9,23 +9,22 @@ namespace JinStore.Models
 {
     public class Product
     {
-        public int TicketID { get; set; }
-        public string TicketClass { get; set; }
-        public string FlightType { get; set; }
-        public string From { get; set; }
-        public string To { get; set; }
+        public string id { get; set; }
+        public string cabin { get; set; }
+        public string origin { get; set; }
+        public string destination { get; set; }
         [Required]
         [DataType(DataType.Date)]
-        public string DePartureDate { get; set; }
+        public DateTime departureTime { get; set; }
         [Required]
         [DataType(DataType.Date)]
-        public string ReturnDate { get; set; }
-        public int AdultNum { get; set; }
-        public int ChildNum { get; set; }
-        public string Price { get; set; }
-        public string Carrier { get; set; }
-        public string FlightNumber { get; set; }
+        public DateTime arrivalTime { get; set; }
+        public int duration { get; set; }
+        public int adultCount { get; set; }
+        public int childCount { get; set; }
+        public string saleTotal { get; set; }
+        public string carrier { get; set; }
+        public string number { get; set; }
 
-       
-    }
+     }
 }

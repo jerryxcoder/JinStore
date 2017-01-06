@@ -12,12 +12,17 @@ namespace JinStore.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Customer
+    public partial class Order
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
+        public string TicketID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public System.DateTime DateCreated { get; set; }
-        public System.DateTime DateLastModified { get; set; }
+        public string PhoneNumber { get; set; }
+        public string CreditCardNumber { get; set; }
+        public string CreditCardName { get; set; }
+        public string CVV { get; set; }
+        public string EmailAddress { get; set; }
+        public Nullable<System.DateTime> CreditCardExpirationDate { get; set; }
     }
 }

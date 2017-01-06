@@ -19,11 +19,11 @@ namespace JinStore
                 defaults: new { Controller = "Students", action = "Index" }
                 );
 
-            routes.MapRoute(
-              name: "Products",
-              url: "products/{id}",
-              defaults: new { Controller = "Products", action = "Index" }
-              );
+            //routes.MapRoute(
+            //  name: "Products",
+            //  url: "products/{id}",
+            //  defaults: new { Controller = "Products", action = "Index" }
+            //  );
 
             routes.MapRoute(
                 name: "Default",

@@ -4,12 +4,11 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="315a6a11872c4ca29db97fa65c046f32" Name="Diagram1">
-        <EntityTypeShape EntityType="MemberModel.Customer" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="MemberModel.History" Width="1.5" PointX="3.75" PointY="0.75" />
-        <EntityTypeShape EntityType="MemberModel.Receipt" Width="1.5" PointX="0.75" PointY="3.75" />
-        <EntityTypeShape EntityType="MemberModel.Review" Width="1.5" PointX="2.75" PointY="3.75" />
-        <EntityTypeShape EntityType="MemberModel.ShoppingCart" Width="1.5" PointX="4.75" PointY="3.75" />
+      <Diagram DiagramId="db2450ff9bdd46b09321f01bc1511e05" Name="Diagram1">
+        <EntityTypeShape EntityType="MemberModel.CustomerList" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MemberModel.CustomerProfile" Width="1.5" PointX="2.375" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MemberModel.Order" Width="1.5" PointX="2.5" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MemberModel.Review" Width="1.5" PointX="4.5" PointY="0.5" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

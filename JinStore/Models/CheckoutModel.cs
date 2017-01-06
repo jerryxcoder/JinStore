@@ -29,7 +29,7 @@ namespace JinStore.Models
         public string CreditCardName { get; set; }
 
         [Required]
-        [RegularExpression("/^[0-9]{3,4}$/", ErrorMessage = "Your CVV Is Invalid!")]
+        //[RegularExpression("/^[0-9]{3,4}$/", ErrorMessage = "Your CVV Is Invalid!")]
         public string CreditCardVerificationValue { get; set; }
 
         [Required]

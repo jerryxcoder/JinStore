@@ -1,4 +1,4 @@
-﻿angular.module("JinStore", []);
+﻿angular.module("JinStore", [])
 
 angular.module("JinStore").controller("TripsController", ["$http", "$scope", function ($http, $scope) {
 
@@ -11,3 +11,6 @@ angular.module("JinStore").controller("TripsController", ["$http", "$scope", fun
     //});
 
 }]);
+
+
+

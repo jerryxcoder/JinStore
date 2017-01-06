@@ -13,10 +13,10 @@ namespace JinStore.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class MemberEntities : DbContext
+    public partial class MemberEntities1 : DbContext
     {
-        public MemberEntities()
-            : base("name=MemberEntities")
+        public MemberEntities1()
+            : base("name=MemberEntities1")
         {
         }
     
@@ -25,10 +25,9 @@ namespace JinStore.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Customer> Customers { get; set; }
-        public virtual DbSet<History> Histories { get; set; }
-        public virtual DbSet<Receipt> Receipts { get; set; }
+        public virtual DbSet<CustomerList> CustomerLists { get; set; }
+        public virtual DbSet<CustomerProfile> CustomerProfiles { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Review> Reviews { get; set; }
-        public virtual DbSet<ShoppingCart> ShoppingCarts { get; set; }
     }
 }

@@ -12,7 +12,7 @@ namespace JinStore.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class ShoppingCart
+    public partial class CustomerProfile
     {
         public int Id { get; set; }
         public string TicketID { get; set; }
