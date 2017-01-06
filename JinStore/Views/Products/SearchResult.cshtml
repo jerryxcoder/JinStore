@@ -1,15 +1,57 @@
 ﻿@{ 
     ViewBag.Title = "SearchResult";
 }
-<div ng-controller="TripsController" class="container">
+<head>
+    <style>
+        .flex-containerBig {
+            width: 100%;
+            height: 100%;
+            flex-flow:column;
+            background-color: lightgrey;
+            display: flex;
+            -webkit-flex-direction: column;
+            flex-direction: column;
+            align-items: center;
+         }
+        .flex-containerSmall{
+            display:flex;
+            flex-flow:row;
+        }
+         .flex-containerXSmall{
+            display:flex;
+            flex-flow:row;
+            justify-content: flex-end;
+         }
+
+        .flex-itemBig {
+            background-color: white;           
+            height: 100px;
+            margin: 10px;
+        }
+
+        .flex-itemSmall {
+            margin: 10px;
+        }
+        #CarrierImg {
+            max-width: 30px;
+            max-height: 30px;
+        }
+    </style>
+</head>
+<div ng-controller="TripsController" class="container flex-containerBig">
     <div ng-init="getTrips()"></div>
-    <table>
-        <tr ng-repeat="x in trips.trips.tripOption">
-            <td>{{x.id }}</td>
-            <td>{{x.slice[0].segment[0].flight.carrier }}</td>
-            <td>{{x.slice[0].segment[0].flight.number }}</td>
-            <td>{{x.saleTotal}}</td>
-        </tr>
-    </table>
-</div>
+             <div ng-repeat="x in trips.trips.tripOption" class="flex-itemBig col-lg-6">
+                 <div class="flex-containerSmall">
+                     <img src="~/img/{{x.slice[0].segment[0].flight.carrier }}.png" id="CarrierImg" class="flex-containerSmall flex-itemSmall" />
+                     <div class="flex-itemSmall">{{x.slice[0].segment[0].leg[0].departureTime }}</div>
+                     <div class="flex-itemSmall">{{x.slice[0].segment[0].leg[0].arrivalTime }}</div>
+                     <div class="flex-itemSmall">{{x.slice[0].duration}}</div>
+                     <div class="flex-itemSmall">{{x.slice[0].segment[0].flight.carrier }}{{x.slice[0].segment[0].flight.number }}</div>
+                     <div class="flex-itemSmall">{{x.saleTotal}}</div>
+                 </div>
+                 <div class="flex-containerXSmall">
+                     <button type="button" class="btn-primary">Select</button>
+                 </div>
+             </div>
+   </div>
 
