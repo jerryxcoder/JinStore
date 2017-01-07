@@ -25,7 +25,7 @@
 
         .flex-itemBig {
             background-color: white;           
-            height: 100px;
+            height: 125px;
             margin: 10px;
         }
 
@@ -49,9 +49,13 @@
                      <div class="flex-itemSmall">{{x.slice[0].segment[0].flight.carrier }}{{x.slice[0].segment[0].flight.number }}</div>
                      <div class="flex-itemSmall">{{x.saleTotal}}</div>
                  </div>
+                 <div class="flex-containerSmall">
+                     <div class="flex-itemSmall">{{x.slice[0].segment[0].leg[0].origin }} - {{x.slice[0].segment[x.slice[0].segment.length-1].leg[0].destination }}</div>
+                 </div>
                  <div class="flex-containerXSmall">
                      <button type="button" class="btn-primary">Select</button>
                  </div>
              </div>
    </div>
+
 
