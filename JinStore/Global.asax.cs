@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -18,6 +19,7 @@ namespace JinStore
             System.Web.Http.GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            WebMatrix.WebData.WebSecurity.InitializeDatabaseConnection("Member","CustomerList","ID","EmailAddress",true);
         }
     }
 }

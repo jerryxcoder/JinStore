@@ -1,0 +1,12 @@
+﻿@model JinStore.Models.ForgotPasswordModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Forgot Password</h2>
+@using (Html.BeginForm())
+{
+    <p>Enter your email address:</p>
+    @Html.TextBoxFor(x => x.EmailAddress)
+    <input type="submit" value="Send Me an email" class="btn btn-primary" />
+}

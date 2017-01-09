@@ -4,6 +4,7 @@
     [LastName]         NVARCHAR (100) NULL,
     [DateCreated]      DATETIME       DEFAULT (getutcdate()) NOT NULL,
     [DateLastModified] DATETIME       DEFAULT (getutcdate()) NOT NULL,
+    [EmailAddress] NVARCHAR(500) NOT NULL, 
     PRIMARY KEY CLUSTERED ([ID] ASC)
 );
 

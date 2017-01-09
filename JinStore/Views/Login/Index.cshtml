@@ -1,0 +1,22 @@
+﻿@model JinStore.Models.LoginModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Login</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary()
+    <div class="form-group">
+        @Html.LabelFor(x => x.EmailAddress)
+        @Html.TextBoxFor(x => x.EmailAddress)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Password)
+        @Html.PasswordFor(x => x.Password)
+    </div>
+        <input type="submit" value="Log In" class="btn btn-primary" />
+        @Html.ActionLink("Register a new account", "Index", "Registration", null, new { @class = "btn" })
+        @Html.ActionLink("Forgot password", "Index", "ForgotPassword", null, new { @class = "btn" })
+}

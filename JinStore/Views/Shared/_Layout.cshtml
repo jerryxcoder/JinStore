@@ -24,13 +24,14 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Flight", "Index", "Products")</li>
-                    <li>@Html.ActionLink("Member Login", "Index", "Checkout")</li>
+                  </ul>
+                <ul class="nav pull-right">               
+                    <li>@Html.Partial("_LoginPartial")</li>
                 </ul>
             </div>
         </div>
     </div>
-     
-        @RenderBody()
+         @RenderBody()
         <hr />
     <div class="container body-content">
         <footer>

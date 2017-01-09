@@ -12,22 +12,18 @@ namespace JinStore.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class CustomerList
+    public partial class webpages_Roles
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CustomerList()
+        public webpages_Roles()
         {
-            this.webpages_Roles = new HashSet<webpages_Roles>();
+            this.CustomerLists = new HashSet<CustomerList>();
         }
     
-        public int ID { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public System.DateTime DateCreated { get; set; }
-        public System.DateTime DateLastModified { get; set; }
-        public string EmailAddress { get; set; }
+        public int RoleId { get; set; }
+        public string RoleName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<webpages_Roles> webpages_Roles { get; set; }
+        public virtual ICollection<CustomerList> CustomerLists { get; set; }
     }
 }

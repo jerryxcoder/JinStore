@@ -1,0 +1,12 @@
+﻿@model JinStore.Models.ResetPasswordModel
+@{
+    ViewBag.Title = "Reset";
+}
+
+<h2>Enter your new password</h2>
+@using (Html.BeginForm())
+{
+    @Html.PasswordFor(x => x.Password)
+    @Html.HiddenFor(x => x.ResetToken)
+    <input type="submit" value="Change my password" class="btn btn-primary" />
+}

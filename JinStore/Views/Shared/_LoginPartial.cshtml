@@ -1,0 +1,23 @@
+﻿
+<nav class="pull-right">
+    <ul class="nav navbar-nav">
+        @if (User.Identity.IsAuthenticated)
+        {
+            <li>
+                Hello, @User.Identity.Name!
+            </li>
+            <li>
+                @Html.ActionLink("Logout", "Index", "Logout")
+            </li>
+        }
+        else
+        {
+            <li>
+                @Html.ActionLink("Login", "Index", "Login")
+            </li>
+            <li>
+                @Html.ActionLink("Register", "Index", "Registration")
+            </li>
+        }
+    </ul>
+</nav>

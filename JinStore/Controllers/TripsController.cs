@@ -50,5 +50,11 @@ namespace JinStore.Controllers
             TripsResource.SearchRequest r = new TripsResource.SearchRequest(service, request);
             return r.Execute();
         }
+        
+        [HttpPut]
+        public void PutTrip(string id = "", string from = "")
+        {
+            Console.WriteLine(id);
+        }
     }
 }

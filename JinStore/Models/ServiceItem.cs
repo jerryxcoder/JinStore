@@ -12,14 +12,10 @@ namespace JinStore.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class CustomerProfile
+    public partial class ServiceItem
     {
         public int Id { get; set; }
-        public string CustomeID_ { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string OrderID { get; set; }
-        public string EmailAddress { get; set; }
-        public Nullable<System.DateTime> DateOfBirth { get; set; }
+        public string ItemName { get; set; }
+        public Nullable<decimal> Price { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿@{ 
+﻿
+@{ 
     ViewBag.Title = "SearchResult";
 }
 <head>
@@ -25,7 +26,7 @@
 
         .flex-itemBig {
             background-color: white;           
-            height: 125px;
+            height: 135px;
             margin: 10px;
         }
 
@@ -38,24 +39,27 @@
         }
     </style>
 </head>
+ 
 <div ng-controller="TripsController" class="container flex-containerBig">
     <div ng-init="getTrips()"></div>
              <div ng-repeat="x in trips.trips.tripOption" class="flex-itemBig col-lg-6">
-                 <div class="flex-containerSmall">
-                     <img src="~/img/{{x.slice[0].segment[0].flight.carrier }}.png" id="CarrierImg" class="flex-containerSmall flex-itemSmall" />
-                     <div class="flex-itemSmall">{{x.slice[0].segment[0].leg[0].departureTime }}</div>
-                     <div class="flex-itemSmall">{{x.slice[0].segment[0].leg[0].arrivalTime }}</div>
-                     <div class="flex-itemSmall">{{x.slice[0].duration}}</div>
-                     <div class="flex-itemSmall">{{x.slice[0].segment[0].flight.carrier }}{{x.slice[0].segment[0].flight.number }}</div>
-                     <div class="flex-itemSmall">{{x.saleTotal}}</div>
-                 </div>
-                 <div class="flex-containerSmall">
-                     <div class="flex-itemSmall">{{x.slice[0].segment[0].leg[0].origin }} - {{x.slice[0].segment[x.slice[0].segment.length-1].leg[0].destination }}</div>
-                 </div>
-                 <div class="flex-containerXSmall">
-                     <button type="button" class="btn-primary">Select</button>
-                 </div>
+                 <form ng-submit="tripSelect()" ng-controller="TripController">
+                     <div class="flex-containerSmall">
+                         <img src="~/img/{{x.slice[0].segment[0].flight.carrier }}.png" id="CarrierImg" class="flex-containerSmall flex-itemSmall" />
+                         <div class="flex-itemSmall">{{x.slice[0].segment[0].leg[0].departureTime }}</div>
+                         <div class="flex-itemSmall">{{x.slice[0].segment[0].leg[0].arrivalTime }}</div>
+                         <div class="flex-itemSmall">{{x.slice[0].duration}}</div>
+                         <div class="flex-itemSmall">{{x.slice[0].segment[0].flight.carrier }}{{x.slice[0].segment[0].flight.number }}</div>
+                         <div class="flex-itemSmall">{{x.saleTotal}}</div>
+                     </div>
+                     <div class="flex-containerSmall">
+                         <div class="flex-itemSmall">{{x.slice[0].segment[0].leg[0].origin }} - {{x.slice[0].segment[x.slice[0].segment.length-1].leg[0].destination }}</div>
+                     </div>
+                     <div class="flex-containerXSmall">
+                         <input type="submit" class="btn btn-primary" value="Select">
+                     </div>
+                 </form>
              </div>
    </div>
-
+ }
 
