@@ -7,6 +7,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using JinStore.Models;
+using System.Web.Mvc;
 
 namespace JinStore.Controllers
 {
@@ -51,10 +53,23 @@ namespace JinStore.Controllers
             return r.Execute();
         }
         
-        [HttpPut]
-        public void PutTrip(string id = "", string from = "")
+        [System.Web.Mvc.HttpPut]
+        public IHttpActionResult PutTrip(string id = "", string from = "")
         {
-            Console.WriteLine(id);
+            Cart ticket = new Cart();
+            ticket.origin = from;
+            ticket.TicketID = id;
+             //TODO: save selected trip details to cart
+            using (MemberEntities1 entities = new MemberEntities1())
+            {
+                entities.Carts.Add(ticket);
+                entities.SaveChanges();
+            }
+
+
+            return Ok();
         }
+
+   
     }
 }

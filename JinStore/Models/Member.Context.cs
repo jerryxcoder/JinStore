@@ -33,5 +33,6 @@ namespace JinStore.Models
         public virtual DbSet<webpages_OAuthMembership> webpages_OAuthMembership { get; set; }
         public virtual DbSet<webpages_Roles> webpages_Roles { get; set; }
         public virtual DbSet<CustomerProfile> CustomerProfiles { get; set; }
+        public virtual DbSet<Cart> Carts { get; set; }
     }
 }

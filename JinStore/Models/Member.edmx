@@ -5,6 +5,14 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="MemberModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="TicketID" Type="nvarchar" MaxLength="50" />
+          <Property Name="origin" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="CustomerList">
           <Key>
             <PropertyRef Name="ID" />
@@ -33,7 +41,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="TicketID" Type="nchar" MaxLength="10" />
+          <Property Name="TicketID" Type="nvarchar" MaxLength="50" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
           <Property Name="LastName" Type="nvarchar" MaxLength="50" />
           <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" />
@@ -42,6 +50,13 @@
           <Property Name="CVV" Type="nvarchar" MaxLength="50" />
           <Property Name="EmailAddress" Type="nvarchar" MaxLength="50" />
           <Property Name="CreditCardExpirationDate" Type="datetime" />
+          <Property Name="origin" Type="nvarchar" MaxLength="50" />
+          <Property Name="destination" Type="nvarchar" MaxLength="50" />
+          <Property Name="departureTime" Type="nvarchar" MaxLength="50" />
+          <Property Name="arrivalTime" Type="nvarchar" MaxLength="50" />
+          <Property Name="saleTotal" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="carrier" Type="nvarchar" MaxLength="50" />
+          <Property Name="number" Type="nchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="Review">
           <Key>
@@ -123,6 +138,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="MemberModelStoreContainer">
+          <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CustomerList" EntityType="Self.CustomerList" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CustomerProfile" EntityType="Self.CustomerProfile" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
@@ -162,7 +178,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="TicketID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="TicketID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -171,6 +187,13 @@
           <Property Name="CVV" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="EmailAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreditCardExpirationDate" Type="DateTime" Precision="3" />
+          <Property Name="origin" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="destination" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="departureTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="arrivalTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="saleTotal" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="carrier" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="number" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityType Name="Review">
           <Key>
@@ -192,6 +215,7 @@
             <End Role="CustomerList" EntitySet="CustomerLists" />
           </AssociationSet>
           <EntitySet Name="CustomerProfiles" EntityType="MemberModel.CustomerProfile" />
+          <EntitySet Name="Carts" EntityType="MemberModel.Cart" />
         </EntityContainer>
         <EntityType Name="ServiceItem">
           <Key>
@@ -250,6 +274,14 @@
           <Property Name="EmailAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DateOfBirth" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="TicketID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="origin" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -271,6 +303,13 @@
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="MemberModel.Order">
               <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="number" ColumnName="number" />
+                <ScalarProperty Name="carrier" ColumnName="carrier" />
+                <ScalarProperty Name="saleTotal" ColumnName="saleTotal" />
+                <ScalarProperty Name="arrivalTime" ColumnName="arrivalTime" />
+                <ScalarProperty Name="departureTime" ColumnName="departureTime" />
+                <ScalarProperty Name="destination" ColumnName="destination" />
+                <ScalarProperty Name="origin" ColumnName="origin" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="TicketID" ColumnName="TicketID" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
@@ -352,6 +391,15 @@
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="CustomeID_" ColumnName="CustomeID " />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Carts">
+            <EntityTypeMapping TypeName="MemberModel.Cart">
+              <MappingFragment StoreEntitySet="Cart">
+                <ScalarProperty Name="origin" ColumnName="origin" />
+                <ScalarProperty Name="TicketID" ColumnName="TicketID" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

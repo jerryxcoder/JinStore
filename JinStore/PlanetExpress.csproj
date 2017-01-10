@@ -187,6 +187,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Cart.cs">
+      <DependentUpon>Member.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CheckoutModel.cs" />
     <Compile Include="Models\CustomerList.cs">
       <DependentUpon>Member.tt</DependentUpon>
