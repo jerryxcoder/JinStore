@@ -17,72 +17,155 @@
             Value = d.Year.ToString()
         });
     }
+
+    var states = new List<SelectListItem> {
+                    new SelectListItem { Value = "AL", Text = "Alabama" },
+                    new SelectListItem { Value = "AK", Text = "Alaska" },
+                    new SelectListItem { Value = "AZ", Text = "Arizona" },
+                    new SelectListItem { Value = "AR", Text = "Arkansas" },
+                    new SelectListItem { Value = "CA", Text = "California" },
+                    new SelectListItem { Value = "CO", Text = "Colorado" },
+                    new SelectListItem { Value = "CT", Text = "Connecticut" },
+                    new SelectListItem { Value = "DE", Text = "Delaware" },
+                    new SelectListItem { Value = "FL", Text = "Florida" },
+                    new SelectListItem { Value = "GA", Text = "Georgia" },
+                    new SelectListItem { Value = "HI", Text = "Hawaii" },
+                    new SelectListItem { Value = "ID", Text = "Idaho" },
+                    new SelectListItem { Value = "IL", Text = "Illinois" },
+                    new SelectListItem { Value = "IN", Text = "Indiana" },
+                    new SelectListItem { Value = "IA", Text = "Iowa" },
+                    new SelectListItem { Value = "KS", Text = "Kansas" },
+                    new SelectListItem { Value = "KY", Text = "Kentucky" },
+                    new SelectListItem { Value = "LA", Text = "Louisiana" },
+                    new SelectListItem { Value = "ME", Text = "Maine" },
+                    new SelectListItem { Value = "MD", Text = "Maryland" },
+                    new SelectListItem { Value = "MA", Text = "Massachusetts" },
+                    new SelectListItem { Value = "MI", Text = "Michigan" },
+                    new SelectListItem { Value = "MN", Text = "Minnesota" },
+                    new SelectListItem { Value = "MS", Text = "Mississippi" },
+                    new SelectListItem { Value = "MO", Text = "Missouri" },
+                    new SelectListItem { Value = "MT", Text = "Montana" },
+                    new SelectListItem { Value = "NC", Text = "North Carolina" },
+                    new SelectListItem { Value = "ND", Text = "North Dakota" },
+                    new SelectListItem { Value = "NE", Text = "Nebraska" },
+                    new SelectListItem { Value = "NV", Text = "Nevada" },
+                    new SelectListItem { Value = "NH", Text = "New Hampshire" },
+                    new SelectListItem { Value = "NJ", Text = "New Jersey" },
+                    new SelectListItem { Value = "NM", Text = "New Mexico" },
+                    new SelectListItem { Value = "NY", Text = "New York" },
+                    new SelectListItem { Value = "OH", Text = "Ohio" },
+                    new SelectListItem { Value = "OK", Text = "Oklahoma" },
+                    new SelectListItem { Value = "OR", Text = "Oregon" },
+                    new SelectListItem { Value = "PA", Text = "Pennsylvania" },
+                    new SelectListItem { Value = "RI", Text = "Rhode Island" },
+                    new SelectListItem { Value = "SC", Text = "South Carolina" },
+                    new SelectListItem { Value = "SD", Text = "South Dakota" },
+                    new SelectListItem { Value = "TN", Text = "Tennessee" },
+                    new SelectListItem { Value = "TX", Text = "Texas" },
+                    new SelectListItem { Value = "UT", Text = "Utah" },
+                    new SelectListItem { Value = "VT", Text = "Vermont" },
+                    new SelectListItem { Value = "VA", Text = "Virginia" },
+                    new SelectListItem { Value = "WA", Text = "Washington" },
+                    new SelectListItem { Value = "WV", Text = "West Virginia" },
+                    new SelectListItem { Value = "WI", Text = "Wisconsin" },
+                    new SelectListItem { Value = "WY", Text = "Wyoming" }
+                }.ToArray();
 }
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    <h2>Checkout</h2>
-    if (!ViewData.ModelState.IsValid)
+<div class="jumbotron container body-content">
+
+    @using (Html.BeginForm())
     {
-        <div class="alert alert-danger">
-            @Html.ValidationSummary(true)
+
+        @Html.AntiForgeryToken()
+        <h2>Checkout</h2>
+        if (!ViewData.ModelState.IsValid)
+        {
+            <div class="alert alert-danger">
+                @Html.ValidationSummary(true)
+            </div>
+        }
+        <div class="form-group">
+            @Html.LabelFor(m => m.FirstName)
+            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.FirstName)
         </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.LastName)
+            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.LastName)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.EmailAddress)
+            @Html.TextBoxFor(m => m.EmailAddress, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.EmailAddress)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.PhoneNumber)
+            @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.PhoneNumber)
+        </div>
+        <h2>Contact Info</h2>
+        <h2>Payment & Billing Info</h2>
+        <div class="form-group">
+            @Html.LabelFor(m => m.CreditCardNumber)
+            @Html.TextBoxFor(m => m.CreditCardNumber, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.CreditCardNumber)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.CreditCardVerificationValue)
+            @Html.TextBoxFor(m => m.CreditCardVerificationValue, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.CreditCardVerificationValue)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.CreditCardName)
+            @Html.TextBoxFor(m => m.CreditCardName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.CreditCardName)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.CreditCardExpirationMonth)
+            <div class="form-inline">
+                @Html.DropDownListFor(m => m.CreditCardExpirationMonth, months, new { @class = "form-control" })
+                /
+                @Html.DropDownListFor(m => m.CreditCardExpirationYear, years, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.CreditCardExpirationMonth)
+                @Html.ValidationMessageFor(m => m.CreditCardExpirationYear)
+            </div>
+        </div>
+        <h2>Billing Info</h2>
+        <div class="form-group">
+            <div class="form-group">
+                @Html.LabelFor(m => m.BillingStreet1)
+                @Html.TextBoxFor(m => m.BillingStreet1, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.BillingStreet2)
+                @Html.TextBoxFor(m => m.BillingStreet2, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.BillingCity)
+                @Html.TextBoxFor(m => m.BillingCity, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.BillingState)
+                @Html.DropDownListFor(m => m.BillingState, states, new { @class = "form-control" })            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.BillingPostalCode)
+                @Html.TextBoxFor(m => m.BillingPostalCode, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.BillingReceipient)
+                @Html.TextBoxFor(m => m.BillingReceipient, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <input type="submit" value="Submit Order" class="btn btn-primary" />
     }
-    <div class="form-group">
-        @Html.LabelFor(m => m.FirstName)
-        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.FirstName)
     </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.LastName)
-        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.LastName)
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.EmailAddress)
-        @Html.TextBoxFor(m => m.EmailAddress, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.EmailAddress)
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.PhoneNumber)
-        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.PhoneNumber)
-    </div>
-    <h2>Contact Info</h2>
-    <h2>Payment & Billing Info</h2>
-    <div class="form-group">
-        @Html.LabelFor(m => m.CreditCardNumber)
-        @Html.TextBoxFor(m => m.CreditCardNumber, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.CreditCardNumber)
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.CreditCardVerificationValue)
-        @Html.TextBoxFor(m => m.CreditCardVerificationValue, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.CreditCardVerificationValue)
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.CreditCardName)
-        @Html.TextBoxFor(m => m.CreditCardName, new { @class = "form-control" })
-        @Html.ValidationMessageFor(m => m.CreditCardName)
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.CreditCardExpirationMonth)
-        <div class="form-inline">
-            @Html.DropDownListFor(m => m.CreditCardExpirationMonth, months, new { @class = "form-control" })
-            /
-            @Html.DropDownListFor(m => m.CreditCardExpirationYear, years, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.CreditCardExpirationMonth)
-            @Html.ValidationMessageFor(m => m.CreditCardExpirationYear)
-        </div>
-    </div>
-    <h2>Shipping Info</h2>
-    <input type="submit" value="Submit Order" class="btn btn-primary" />
-}
-@section scripts{
-    <script>
-    $(document).ready(function() {
-    $('.input-validation-error').parents('.form-group').addClass('has-error');
-    $('.field-validation-error').addClass('text-danger');
-    });
-    </script>
-}
+    @section scripts{
+        <script>
+            $(document).ready(function () {
+                $('.input-validation-error').parents('.form-group').addClass('has-error');
+                $('.field-validation-error').addClass('text-danger');
+            });
+        </script>
+    }

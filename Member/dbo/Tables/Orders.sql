@@ -16,6 +16,12 @@
     [saleTotal]                DECIMAL (18)  NULL,
     [carrier]                  NVARCHAR (50) NULL,
     [number]                   NCHAR (10)    NULL,
+    [BillingStreet1] NVARCHAR(50) NULL, 
+    [BillingStreet2] NVARCHAR(50) NULL, 
+    [BillingCity] NVARCHAR(50) NULL, 
+    [BillingState] NVARCHAR(50) NULL, 
+    [BillingPostalCode] NVARCHAR(50) NULL, 
+    [BillingReceipient] NVARCHAR(50) NULL, 
     PRIMARY KEY CLUSTERED ([Id] ASC)
 );
 

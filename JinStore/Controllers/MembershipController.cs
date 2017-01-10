@@ -54,7 +54,7 @@ namespace JinStore.Controllers
 
         // POST: Registration
         [HttpPost]
-        public ActionResult Registration(RegistrationModel model)
+        public async Task<ActionResult> Registration(RegistrationModel model)
         {
             if (ModelState.IsValid)
             {
@@ -64,9 +64,25 @@ namespace JinStore.Controllers
                 }
                 else
                 {
-                    WebSecurity.CreateUserAndAccount(model.EmailAddress, model.Password, null, false);
-                    WebSecurity.Login(model.EmailAddress, model.Password, true);
-                    return RedirectToAction("Index", "Home");
+                    string confirmationToken = WebSecurity.CreateUserAndAccount(model.EmailAddress, model.Password, null, true);
+                    string confirmationUrl = Request.Url.GetLeftPart(UriPartial.Authority) + "/Membership/Confirm?confirmationToken=" + confirmationToken;
+                    
+                    string sendGridApiKey = ConfigurationManager.AppSettings["SendGrid.ApiKey"];
+                    
+                    SendGrid.SendGridAPIClient client = new SendGrid.SendGridAPIClient(sendGridApiKey);
+                    
+                    Email from = new Email("admin@codingtemple.com");
+                    string subject = "Confirm your new account";
+                    Email to = new Email(model.EmailAddress);
+                    Content content = new Content("text/html", string.Format("<a href=\"{0}\">Confirm</a>", confirmationUrl));
+                    
+                    Mail mail = new Mail(from, subject, to, content);
+                    mail.TemplateId = "00aaf54f-cf22-4cfe-98b5-b20d3cd72354";
+                    mail.Personalization[0].AddSubstitution("-link-", confirmationUrl);
+                    var response = await client.client.mail.send.post(requestBody: mail.Get());
+                    
+                    string message = await response.Body.ReadAsStringAsync();
+                    return RedirectToAction("ConfirmationSent");
                 }
             }
             return View(model);
@@ -124,10 +140,25 @@ namespace JinStore.Controllers
             {
                 WebSecurity.ResetPassword(model.ResetToken, model.Password);
                 TempData["PasswordChanged"] = true;
-                return RedirectToAction("Login");
+                return RedirectToAction("Login","Membership");
 
             }
             return View(model);
         }
+
+        public ActionResult ConfirmationSent()
+         {
+             return View();
+         }
+ 
+         public ActionResult Confirm(string confirmationToken)
+         {
+             if (WebSecurity.ConfirmAccount(confirmationToken))
+             {
+                 TempData["AccountConfirmed"] = true;
+                 return RedirectToAction("Login");
+             }
+             return RedirectToAction("Index", "Home");
+         }
     }
 }

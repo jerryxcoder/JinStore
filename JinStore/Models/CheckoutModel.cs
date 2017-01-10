@@ -39,5 +39,23 @@ namespace JinStore.Models
         [Required]
         [Range(2000, 3000)]
         public int CreditCardExpirationYear { get; set; }
+
+        [Required]
+        public string BillingStreet1 { get; set; }
+
+        [Required]
+        public string BillingStreet2 { get; set; }
+
+        [Required]
+        public string BillingCity { get; set; }
+
+        [Required]
+        public string BillingState { get; set; }
+
+        [Required]
+        public string BillingPostalCode { get; set; }
+
+        [Required]
+        public string BillingReceipient { get; set; }
     }
 }

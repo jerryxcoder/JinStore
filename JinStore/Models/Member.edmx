@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="TicketID" Type="nvarchar" MaxLength="50" />
           <Property Name="origin" Type="nvarchar" MaxLength="50" />
         </EntityType>
@@ -57,6 +57,12 @@
           <Property Name="saleTotal" Type="decimal" Precision="18" Scale="0" />
           <Property Name="carrier" Type="nvarchar" MaxLength="50" />
           <Property Name="number" Type="nchar" MaxLength="10" />
+          <Property Name="BillingStreet1" Type="nvarchar" MaxLength="50" />
+          <Property Name="BillingStreet2" Type="nvarchar" MaxLength="50" />
+          <Property Name="BillingCity" Type="nvarchar" MaxLength="50" />
+          <Property Name="BillingState" Type="nvarchar" MaxLength="50" />
+          <Property Name="BillingPostalCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="BillingReceipient" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Review">
           <Key>
@@ -194,6 +200,12 @@
           <Property Name="saleTotal" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="carrier" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="number" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="BillingStreet1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BillingStreet2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BillingCity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BillingState" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BillingPostalCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BillingReceipient" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Review">
           <Key>
@@ -278,7 +290,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="TicketID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="origin" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
@@ -303,6 +315,12 @@
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="MemberModel.Order">
               <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="BillingReceipient" ColumnName="BillingReceipient" />
+                <ScalarProperty Name="BillingPostalCode" ColumnName="BillingPostalCode" />
+                <ScalarProperty Name="BillingState" ColumnName="BillingState" />
+                <ScalarProperty Name="BillingCity" ColumnName="BillingCity" />
+                <ScalarProperty Name="BillingStreet2" ColumnName="BillingStreet2" />
+                <ScalarProperty Name="BillingStreet1" ColumnName="BillingStreet1" />
                 <ScalarProperty Name="number" ColumnName="number" />
                 <ScalarProperty Name="carrier" ColumnName="carrier" />
                 <ScalarProperty Name="saleTotal" ColumnName="saleTotal" />

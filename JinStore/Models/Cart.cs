@@ -14,7 +14,7 @@ namespace JinStore.Models
     
     public partial class Cart
     {
-        public int Id { get; set; }
+        public System.Guid Id { get; set; }
         public string TicketID { get; set; }
         public string origin { get; set; }
     }

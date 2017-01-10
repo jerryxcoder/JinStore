@@ -9,28 +9,40 @@ using System.Net.Http;
 using System.Web.Http;
 using JinStore.Models;
 using System.Web.Mvc;
+using System.Configuration;
 
 namespace JinStore.Controllers
 {
     public class TripsController : ApiController
     {
-        public TripsSearchResponse Get()
+        public TripsSearchResponse Get(string origin = "", string destination = "", DateTime? departureTime = null, int? adultCount = null)
         {
-            DateTime? departureDate = null;
-            string origin = "ORD";
-            string destination = "SFO";
-            int passengerCount = 1;
-            if (!departureDate.HasValue)
+            if (string.IsNullOrEmpty(origin))
             {
-                departureDate = DateTime.Now.AddDays(30);
+                origin = "ORD";
             }
+            if (string.IsNullOrEmpty(destination))
+            {
+                destination = "SFO";
+            }
+
+            if (departureTime == null)
+            {
+                departureTime = DateTime.Now.AddDays(30);
+            }
+            if(adultCount == null)
+            {
+                adultCount = 1;
+            }
+
+
             BaseClientService.Initializer initializer = new BaseClientService.Initializer();
-            initializer.ApiKey = "";
+            initializer.ApiKey = ConfigurationManager.AppSettings["QPX.Key"];
             initializer.ApplicationName = "JinFlightSearch";
             QPXExpressService service = new QPXExpressService(initializer);
             SliceInput slice = new SliceInput
             {
-                Date = departureDate.Value.ToString("yyyy-MM-dd"),
+                Date = departureTime.Value.ToString("yyyy-MM-dd"),
                 Origin = origin,
                 Destination = destination,
             };
@@ -42,7 +54,7 @@ namespace JinStore.Controllers
                 {
                     Passengers = new PassengerCounts
                     {
-                        AdultCount = passengerCount,
+                        AdultCount = adultCount,
                     },
                     Slice = slices
 
@@ -54,20 +66,22 @@ namespace JinStore.Controllers
         }
         
         [System.Web.Mvc.HttpPut]
-        public IHttpActionResult PutTrip(string id = "", string from = "")
+        public Guid PutTrip(string id = "", string from = "")
         {
             Cart ticket = new Cart();
             ticket.origin = from;
             ticket.TicketID = id;
+            ticket.Id = Guid.NewGuid();
              //TODO: save selected trip details to cart
             using (MemberEntities1 entities = new MemberEntities1())
             {
                 entities.Carts.Add(ticket);
                 entities.SaveChanges();
             }
+            
 
 
-            return Ok();
+            return ticket.Id;
         }
 
    

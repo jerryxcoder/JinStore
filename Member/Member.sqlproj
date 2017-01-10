@@ -72,5 +72,6 @@
     <Build Include="dbo\Tables\webpages_OAuthMembership.sql" />
     <Build Include="dbo\Tables\webpages_Membership.sql" />
     <Build Include="dbo\Tables\ServiceItem.sql" />
+    <Build Include="dbo\Tables\Cart.sql" />
   </ItemGroup>
 </Project>

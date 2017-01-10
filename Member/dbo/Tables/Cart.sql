@@ -1,0 +1,7 @@
+﻿CREATE TABLE [dbo].[Cart] (
+    [Id]       UNIQUEIDENTIFIER  NOT NULL DEFAULT(NEWID()),
+    [TicketID] NVARCHAR (50) NULL,
+    [origin]   NVARCHAR (50) NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+

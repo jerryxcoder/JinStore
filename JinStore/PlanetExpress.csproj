@@ -85,6 +85,10 @@
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Rentler.SmartyStreets, Version=0.1.71.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rentler.SmartyStreets.0.1.71.0\lib\net45\Rentler.SmartyStreets.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="SendGrid, Version=8.0.5.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
       <HintPath>..\packages\Sendgrid.8.0.5\lib\SendGrid.dll</HintPath>
       <Private>True</Private>
@@ -320,10 +324,11 @@
     <Content Include="Views\Membership\ForgotPassword.cshtml" />
     <Content Include="Views\Membership\Reset.cshtml" />
     <Content Include="Views\Membership\ResetSent.cshtml" />
+    <Content Include="Views\Membership\ConfirmationSent.cshtml" />
+    <Content Include="Views\Cart\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Cart\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

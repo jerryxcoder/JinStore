@@ -17,6 +17,12 @@
                         Password Changed.  Login to Continue.
                     </div>
                 }
+                if (TempData["AccountConfirmed"] != null)
+                {
+                     <div class="alert alert-success">
+                         Your account has been activated.  Please login to continue.
+                     </div>
+                 }
                 @Html.ValidationSummary()
                 <div class="form-group">
                     @Html.LabelFor(x => x.EmailAddress)

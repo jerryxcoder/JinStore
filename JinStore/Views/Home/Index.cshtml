@@ -43,18 +43,18 @@
     <div class="jumbotron container body-content">
         <div ng-controller="TripsController" class="container">
             <div ng-init="getTrips()"></div>
-            @using (Html.BeginForm("SearchResult", "Products", FormMethod.Post))
+            @using (Html.BeginForm("SearchResult", "Products", FormMethod.Get))
             {
                 <h2>Flight Search</h2>
                 <div class="form-group input-group-sm">
-                    <select ng-model="departureCity" id="origin">
+                    <select ng-model="departureCity" id="origin" name="origin">
                         <option ng-repeat="city in trips.trips.data.city" value="{{city.code}}">{{city.name}}</option>
                         <option ng-repeat="airport in trips.trips.data.airport" value="{{airport.code}}">{{airport.name}}</option>
                     </select>
                 </div>
 
                 <div class="form-group input-group-sm">
-                    <select ng-model="arrivalCity" id="destination">
+                    <select ng-model="arrivalCity" id="destination" name="destination">
                         <option ng-repeat="city in trips.trips.data.city" value="{{city.code}}">{{city.name}}</option>
                         <option ng-repeat="airport in trips.trips.data.airport" value="{{airport.code}}">{{airport.name}}</option>
                     </select>

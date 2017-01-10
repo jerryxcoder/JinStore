@@ -1,0 +1,11 @@
+﻿@model JinStore.Models.Cart
+ 
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Cart</h2>
+@Model.TicketID
+@Model.origin
+
+@Html.ActionLink("Check Out", "Index", "Checkout")
