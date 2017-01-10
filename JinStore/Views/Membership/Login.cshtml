@@ -1,0 +1,45 @@
+﻿@model JinStore.Models.LoginModel
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<div class="row">
+    <div class="col-xs-12 col-sm-4 col-sm-offset-4">
+        <div class="well">
+            <h2>Login</h2>
+
+            @using (Html.BeginForm())
+            {
+                if (TempData["PasswordChanged"] != null)
+                {
+                    <div class="alert alert-success">
+                        Password Changed.  Login to Continue.
+                    </div>
+                }
+                @Html.ValidationSummary()
+                <div class="form-group">
+                    @Html.LabelFor(x => x.EmailAddress)
+                    @Html.TextBoxFor(x => x.EmailAddress, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.EmailAddress)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(x => x.Password)
+                    @Html.PasswordFor(x => x.Password, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.Password)
+                </div>
+                <div class="checkbox">
+                    <label>
+                        @Html.CheckBoxFor(x => x.PersistCookie)
+                        @Html.DisplayNameFor(x => x.PersistCookie)
+                    </label>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Log In" class="btn btn-primary btn-block" />
+                    @Html.ActionLink("Register a new account", "Registration", null, new { @class = "btn btn-default btn-block" })
+                    @Html.ActionLink("Forgot password", "ForgotPassword", null, new { @class = "btn btn-default btn-block" })
+                </div>
+            }
+        </div>
+    </div>
+</div>

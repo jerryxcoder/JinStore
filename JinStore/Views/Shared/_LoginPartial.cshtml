@@ -7,16 +7,16 @@
                 Hello, @User.Identity.Name!
             </li>
             <li>
-                @Html.ActionLink("Logout", "Index", "Logout")
+                @Html.ActionLink("Logout", "Logout", "Membership")
             </li>
         }
         else
         {
             <li>
-                @Html.ActionLink("Login", "Index", "Login")
+                @Html.ActionLink("Login", "Login", "Membership")
             </li>
             <li>
-                @Html.ActionLink("Register", "Index", "Registration")
+                @Html.ActionLink("Register", "Registration", "Membership")
             </li>
         }
     </ul>

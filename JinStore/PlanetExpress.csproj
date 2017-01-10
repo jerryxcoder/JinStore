@@ -85,6 +85,14 @@
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="SendGrid, Version=8.0.5.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sendgrid.8.0.5\lib\SendGrid.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SendGrid.CSharp.HTTP.Client, Version=3.0.0.0, Culture=neutral, PublicKeyToken=79219bf4e5ecaaca, processorArchitecture=MSIL">
+      <HintPath>..\packages\SendGrid.CSharp.HTTP.Client.3.0.0\lib\SendGrid.CSharp.HTTP.Client.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -176,13 +184,10 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
-    <Compile Include="Controllers\ForgotPasswordController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\LogoutController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
+    <Compile Include="Controllers\MembershipController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
-    <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="Controllers\TripsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -197,7 +202,6 @@
     <Compile Include="Models\CustomerProfile.cs">
       <DependentUpon>Member.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\Member.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -214,11 +218,11 @@
       <DependentUpon>Member.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Members.cs" />
+    <Compile Include="Models\MembershipModel.cs" />
     <Compile Include="Models\Order.cs">
       <DependentUpon>Member.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Product.cs" />
-    <Compile Include="Models\RegistrationModel.cs" />
     <Compile Include="Models\Review.cs">
       <DependentUpon>Member.tt</DependentUpon>
     </Compile>
@@ -310,12 +314,12 @@
     <Content Include="trips.json" />
     <Content Include="Views\Products\SearchResult.cshtml" />
     <Content Include="Views\Member\MemberAdmin.cshtml" />
-    <Content Include="Views\Registration\Index.cshtml" />
-    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Membership\Registration.cshtml" />
+    <Content Include="Views\Membership\Login.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\ForgotPassword\Index.cshtml" />
-    <Content Include="Views\ForgotPassword\Reset.cshtml" />
-    <Content Include="Views\ForgotPassword\ResetSent.cshtml" />
+    <Content Include="Views\Membership\ForgotPassword.cshtml" />
+    <Content Include="Views\Membership\Reset.cshtml" />
+    <Content Include="Views\Membership\ResetSent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

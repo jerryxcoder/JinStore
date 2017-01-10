@@ -6,21 +6,23 @@ using System.Web;
 
 namespace JinStore.Models
 {
-
     public class RegistrationModel
     {
         [Required]
         [EmailAddress]
+        [Display(Name = "Email")]
         public string EmailAddress { get; set; }
 
         [Required]
         public string Password { get; set; }
+
     }
 
     public class ForgotPasswordModel
     {
         [Required]
         [EmailAddress]
+        [Display(Name = "Email")]
         public string EmailAddress { get; set; }
 
     }
@@ -30,5 +32,19 @@ namespace JinStore.Models
         [Required]
         public string Password { get; set; }
         public string ResetToken { get; set; }
+    }
+
+    public class LoginModel
+    {
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Email")]
+        public string EmailAddress { get; set; }
+
+        [Required]
+        public string Password { get; set; }
+
+        [Display(Name = "Keep Me Logged In")]
+        public bool PersistCookie { get; set; }
     }
 }
