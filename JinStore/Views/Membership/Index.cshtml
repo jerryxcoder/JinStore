@@ -1,0 +1,45 @@
+﻿
+@model JinStore.Models.MyAccountModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Account Details For @Html.DisplayFor(x => x.EmailAddress)</h2>
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.FirstName)
+        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.FirstName)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.LastName)
+        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.LastName)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Website)
+        @Html.TextBoxFor(m => m.Website, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Website)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Company)
+        @Html.TextBoxFor(m => m.Company, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Company)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Phone)
+        @Html.TextBoxFor(m => m.Phone, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Phone)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Fax)
+        @Html.TextBoxFor(m => m.Fax, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Fax)
+    </div>
+
+    <input type="submit" value="Save" class="btn btn-primary" />
+}
+@Html.ActionLink("Change Password", "ChangePassword")
+

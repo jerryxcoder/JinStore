@@ -12,17 +12,12 @@ namespace JinStore.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Cart
+    public partial class Contact
     {
-        public System.Guid Id { get; set; }
-        public string TicketID { get; set; }
-        public string origin { get; set; }
-        public string destination { get; set; }
-        public string departureTime { get; set; }
-        public string arrivalTime { get; set; }
-        public Nullable<decimal> saleTotal { get; set; }
-        public string carrier { get; set; }
-        public string number { get; set; }
-        public Nullable<int> NumStops { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string Phone { get; set; }
+        public string Message { get; set; }
     }
 }

@@ -22,6 +22,9 @@ namespace JinStore.Controllers
 
                     model.TicketID = order.TicketID;
                     model.origin = order.origin;
+                    model.destination = order.destination;
+                    model.departureTime = order.departureTime;
+                    model.arrivalTime = order.arrivalTime;
                 }
 
             }

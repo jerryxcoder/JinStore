@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using System.Web.Security;
 
 namespace JinStore
 {
@@ -20,6 +21,11 @@ namespace JinStore
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             WebMatrix.WebData.WebSecurity.InitializeDatabaseConnection("Member","CustomerList","ID","EmailAddress",true);
+            if (!Roles.RoleExists("Administrator"))
+                Roles.CreateRole("Administrator");
+            if (!Roles.RoleExists("ProductAdministrator"))
+                Roles.CreateRole("ProductAdministrator");
+            
         }
     }
 }

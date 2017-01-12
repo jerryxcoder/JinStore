@@ -66,11 +66,16 @@ namespace JinStore.Controllers
         }
         
         [System.Web.Mvc.HttpPut]
-        public Guid PutTrip(string id = "", string from = "")
+        public Guid PutTrip(string id = "", string origin = "", string destination="",
+            string departureTime="",string arrivalTime="")
         {
             Cart ticket = new Cart();
-            ticket.origin = from;
+            ticket.origin = origin;
             ticket.TicketID = id;
+            ticket.destination = destination;
+            ticket.departureTime = departureTime;
+            ticket.arrivalTime = arrivalTime;
+
             ticket.Id = Guid.NewGuid();
              //TODO: save selected trip details to cart
             using (MemberEntities1 entities = new MemberEntities1())

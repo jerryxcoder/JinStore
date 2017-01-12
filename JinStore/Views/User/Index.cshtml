@@ -1,0 +1,17 @@
+﻿@model IEnumerable<JinStore.Models.UserModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Manage Users</h2>
+<table class="table table-striped">
+    @foreach (var user in Model)
+    {
+        <tr>
+            <td>@user.ID</td>
+            <td>@user.EmailAddress</td>
+            <td>@String.Join(",", user.Roles)</td>
+            <td>@Html.ActionLink("Edit", "Edit", new { id = user.ID }, new { @class = "btn btn-primary" })</td>
+        </tr>
+    }
+</table>

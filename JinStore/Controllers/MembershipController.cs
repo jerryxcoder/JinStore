@@ -9,12 +9,73 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using WebMatrix.WebData;
+using System.Security;
+
 
 namespace JinStore.Controllers
 {
+    [Authorize]
     public class MembershipController : Controller
     {
+        public ActionResult Index()
+        {
+            //if (User.Identity.IsAuthenticated == false)     //This works, but it's verbose.  Use an attribute!
+            //    return RedirectToAction("Login");
+            MyAccountModel model = new MyAccountModel();
+            model.EmailAddress = User.Identity.Name;
+
+            string publicKey = ConfigurationManager.AppSettings["Braintree.PublicKey"];
+            string privateKey = ConfigurationManager.AppSettings["Braintree.PrivateKey"];
+            string environment = ConfigurationManager.AppSettings["Braintree.Environment"];
+            string merchantId = ConfigurationManager.AppSettings["Braintree.MerchantId"];
+
+            Braintree.BraintreeGateway braintree = new Braintree.BraintreeGateway(environment, merchantId, publicKey, privateKey);
+            int userId = -1;
+            using (MemberEntities1 e = new MemberEntities1())
+            {
+                userId = e.CustomerLists.Single(x => x.EmailAddress == User.Identity.Name).ID;
+            }
+            var customer = braintree.Customer.Find(userId.ToString());
+            model.FirstName = customer.FirstName;
+            model.LastName = customer.LastName;
+            model.Phone = customer.Phone;
+            model.Company = customer.Company;
+            model.Fax = customer.Fax;
+            model.Website = customer.Website;
+            return View(model);
+        }
+
+        // POST: Index
+        [HttpPost]
+        public ActionResult Index(MyAccountModel model)
+        {
+
+
+            string publicKey = ConfigurationManager.AppSettings["Braintree.PublicKey"];
+            string privateKey = ConfigurationManager.AppSettings["Braintree.PrivateKey"];
+            string environment = ConfigurationManager.AppSettings["Braintree.Environment"];
+            string merchantId = ConfigurationManager.AppSettings["Braintree.MerchantId"];
+
+            Braintree.BraintreeGateway braintree = new Braintree.BraintreeGateway(environment, merchantId, publicKey, privateKey);
+            int userId = -1;
+            using (MemberEntities1 e = new MemberEntities1())
+            {
+                userId = e.CustomerLists.Single(x => x.EmailAddress == User.Identity.Name).ID;
+            }
+            Braintree.CustomerRequest update = new Braintree.CustomerRequest();
+            update.FirstName = model.FirstName;
+            update.LastName = model.LastName;
+            update.Phone = model.Phone;
+            update.Company = model.Company;
+            update.Fax = model.Fax;
+            update.Website = model.Website;
+            braintree.Customer.Update(userId.ToString(), update);
+
+            return View(model);
+        }
+
         // GET: Login
+        [AllowAnonymous]
         public ActionResult Login()
         {
             LoginModel model = new LoginModel();
@@ -24,13 +85,14 @@ namespace JinStore.Controllers
         // POST: Login
 
         [HttpPost]
-        public ActionResult Login(JinStore.Models.LoginModel model)
+        [AllowAnonymous]
+       public ActionResult Login(Models.LoginModel model, string returnUrl = "/")
         {
             if (ModelState.IsValid)
             {
                 if (WebSecurity.Login(model.EmailAddress, model.Password, model.PersistCookie))
                 {
-                    return RedirectToAction("Index", "Home");
+                    return Redirect(returnUrl);
                 }
                 ModelState.AddModelError("EmailAddress", "Username or password was incorrect.");
 
@@ -46,6 +108,8 @@ namespace JinStore.Controllers
         }
 
         // GET: Registration
+        [AllowAnonymous]
+
         public ActionResult Registration()
         {
             RegistrationModel model = new RegistrationModel();
@@ -54,6 +118,7 @@ namespace JinStore.Controllers
 
         // POST: Registration
         [HttpPost]
+        [AllowAnonymous]
         public async Task<ActionResult> Registration(RegistrationModel model)
         {
             if (ModelState.IsValid)
@@ -65,6 +130,25 @@ namespace JinStore.Controllers
                 else
                 {
                     string confirmationToken = WebSecurity.CreateUserAndAccount(model.EmailAddress, model.Password, null, true);
+                    string publicKey = ConfigurationManager.AppSettings["Braintree.PublicKey"];
+                    string privateKey = ConfigurationManager.AppSettings["Braintree.PrivateKey"];
+                    string environment = ConfigurationManager.AppSettings["Braintree.Environment"];
+                    string merchantId = ConfigurationManager.AppSettings["Braintree.MerchantId"];
+                    
+                    
+                    Braintree.BraintreeGateway braintree = new Braintree.BraintreeGateway(environment, merchantId, publicKey, privateKey);
+                    Braintree.CustomerRequest request = new Braintree.CustomerRequest();
+                    request.Email = model.EmailAddress;
+                    using (MemberEntities1 entities = new MemberEntities1())
+                    {
+                        request.Id = entities.CustomerLists.Single(x => x.EmailAddress == model.EmailAddress).ID.ToString();
+                    }
+                    request.CreditCard = new Braintree.CreditCardRequest();
+                    
+                    
+                    
+                    var customerResult = braintree.Customer.Create(request);
+
                     string confirmationUrl = Request.Url.GetLeftPart(UriPartial.Authority) + "/Membership/Confirm?confirmationToken=" + confirmationToken;
                     
                     string sendGridApiKey = ConfigurationManager.AppSettings["SendGrid.ApiKey"];
@@ -89,6 +173,7 @@ namespace JinStore.Controllers
         }
 
         // GET: ForgotPassword
+        [AllowAnonymous]
         public ActionResult ForgotPassword()
         {
             var model = new ForgotPasswordModel();
@@ -96,6 +181,7 @@ namespace JinStore.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public async Task<ActionResult> ForgotPassword(JinStore.Models.ForgotPasswordModel model)
         {
             if (WebSecurity.UserExists(model.EmailAddress))
@@ -121,11 +207,13 @@ namespace JinStore.Controllers
             return RedirectToAction("ResetSent");
         }
 
+        [AllowAnonymous]
         public ActionResult ResetSent()
         {
             return View();
         }
 
+        [AllowAnonymous]
         public ActionResult Reset(string resetToken)
         {
             ResetPasswordModel model = new ResetPasswordModel();
@@ -134,6 +222,7 @@ namespace JinStore.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult Reset(ResetPasswordModel model)
         {
             if (ModelState.IsValid)
@@ -150,8 +239,9 @@ namespace JinStore.Controllers
          {
              return View();
          }
- 
-         public ActionResult Confirm(string confirmationToken)
+
+        [AllowAnonymous]
+        public ActionResult Confirm(string confirmationToken)
          {
              if (WebSecurity.ConfirmAccount(confirmationToken))
              {

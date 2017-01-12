@@ -4,11 +4,23 @@
         @if (User.Identity.IsAuthenticated)
         {
             <li>
-                Hello, @User.Identity.Name!
+                @Html.ActionLink("My Account", "Index", "Membership")
             </li>
             <li>
-                @Html.ActionLink("Logout", "Logout", "Membership")
+                @Html.ActionLink("Logout as " + User.Identity.Name, "Logout", "Membership")
             </li>
+            if ((User.IsInRole("Administrator")) || (User.IsInRole("ProductAdministrator")))
+            {
+                <li>
+                    @Html.ActionLink("Manage Products", "Index", "Products")
+                </li>
+            }
+            if (User.IsInRole("Administrator"))
+            {
+                <li>
+                    @Html.ActionLink("Manage Users", "Index", "User")
+                </li>
+            }
         }
         else
         {

@@ -1,0 +1,18 @@
+﻿@model IEnumerable<JinStore.Models.PaymentModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Manage Saved Credit Cards</h2>
+
+<table class="table table-striped">
+    @foreach (var card in Model)
+    {
+        <tr>
+            <td>@card.LastFour</td>
+            <td>@card.CardType</td>
+            <td>@card.ExpirationDate</td>
+            <td>@Html.ActionLink("Edit", "Edit", new { id = card.ID }, new { @class = "btn btn-primary" })</td>
+        </tr>
+    }
+</table>

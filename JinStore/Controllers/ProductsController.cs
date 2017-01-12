@@ -16,16 +16,20 @@ namespace JinStore.Controllers
 {
     public class ProductsController : Controller
     {
-        public ActionResult Index()
-        {           
-            return View();
-        }
+      
+
         public ActionResult SearchResult()
         {
             Product model = new Product();
             return View(model);
         }
-         
+
+        [Authorize(Roles = "Admin,ProductAdmin")]
+        public ActionResult RoundTripSearch()
+        {
+            return View();
+        }
+
 
     }
 }

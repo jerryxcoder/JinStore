@@ -1,0 +1,36 @@
+﻿@model JinStore.Models.UserModel
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        @Html.LabelFor(x => x.ID)
+        @Html.DisplayFor(x => x.ID)
+        @Html.HiddenFor(x => x.ID)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.EmailAddress)
+        @Html.DisplayFor(x => x.EmailAddress)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Roles)
+        <select multiple class="form-input" name="Roles">
+            @foreach (var role in Model.AvailableRoles)
+            {
+                if (Model.Roles.Contains(role))
+                {
+                    <option selected="selected">@role</option>
+                }
+                else
+                {
+                    <option>@role</option>
+                }
+            }
+        </select>
+
+    </div>
+    <input type="submit" value="Save" class="btn btn-primary" />
+}
