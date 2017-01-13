@@ -13,15 +13,15 @@ namespace CodingTemple.ShoeStore.Mvc.Controllers
     public class CheckoutController : Controller
     {
         // GET: Checkout
-        public ActionResult Index()
+        public ActionResult Index(Guid? id)
         {
 
             CheckoutModel model = new CheckoutModel();
 
             using (MemberEntities1 entities = new MemberEntities1())
             {
-                int orderId = int.Parse(Request.Cookies["OrderID"].Value);
-                var order = entities.Orders.Single(x => x.Id == orderId);
+                //int orderId = int.Parse(Request.Cookies["TicketID"].Value);
+                var order = entities.Carts.Single(x => x.Id == id);
                 model.FirstName = order.FirstName;
                 model.LastName = order.LastName;
                 model.EmailAddress = order.EmailAddress;
@@ -43,8 +43,8 @@ namespace CodingTemple.ShoeStore.Mvc.Controllers
         {
             using (MemberEntities1 entities = new MemberEntities1())
             {
-                int orderId = int.Parse(Request.Cookies["OrderID"].Value);
-                var o = entities.Orders.Single(x => x.Id == orderId);
+                //int orderId = int.Parse(Request.Cookies["OrderID"].Value);
+                var o = entities.Carts.Single(x => x.EmailAddress == model.EmailAddress);
               
                 if (ModelState.IsValid)
                 {
@@ -58,34 +58,34 @@ namespace CodingTemple.ShoeStore.Mvc.Controllers
                     var addresses = await client.GetStreetAddressAsync(model.BillingStreet1, null, model.BillingStreet2, model.BillingCity, model.BillingState, model.BillingPostalCode);
                     if (addresses.Count() == 0)
                     {
-                        ModelState.AddModelError("ShippingStreet1", "Could not find exact or similiar address");
+                        ModelState.AddModelError("BillingStreet1", "Could not find exact or similiar address");
                         addressValidationSuccessful = false;
                     }
                     else
                     {
                         if (!string.IsNullOrEmpty(model.BillingStreet1) && addresses.First().delivery_line_1 != model.BillingStreet1)
                         {
-                            ModelState.AddModelError("ShippingStreet1", string.Format("Suggested Address: {0}", addresses.First().delivery_line_1));
+                            ModelState.AddModelError("BillingStreet1", string.Format("Suggested Address: {0}", addresses.First().delivery_line_1));
                             addressValidationSuccessful = false;
                         }
                         if (!string.IsNullOrEmpty(model.BillingStreet2) && addresses.First().delivery_line_2 != model.BillingStreet2)
                         {
-                            ModelState.AddModelError("ShippingStreet2", string.Format("Suggested Address: {0}", addresses.First().delivery_line_2));
+                            ModelState.AddModelError("BillingStreet2", string.Format("Suggested Address: {0}", addresses.First().delivery_line_2));
                             addressValidationSuccessful = false;
                         }
                         if (!string.IsNullOrEmpty(model.BillingCity) && addresses.First().components.city_name != model.BillingCity)
                         {
-                            ModelState.AddModelError("ShippingCity", string.Format("Suggested Address: {0}", addresses.First().components.city_name));
+                            ModelState.AddModelError("BillingCity", string.Format("Suggested Address: {0}", addresses.First().components.city_name));
                             addressValidationSuccessful = false;
                         }
                         if (!string.IsNullOrEmpty(model.BillingPostalCode) && addresses.First().components.zipcode != model.BillingPostalCode)
                         {
-                            ModelState.AddModelError("ShippingPostalCode", string.Format("Suggested Address: {0}", addresses.First().components.zipcode));
+                            ModelState.AddModelError("BillingPostalCode", string.Format("Suggested Address: {0}", addresses.First().components.zipcode));
                             addressValidationSuccessful = false;
                         }
                         if (!string.IsNullOrEmpty(model.BillingState) && addresses.First().components.state_abbreviation != model.BillingState)
                         {
-                            ModelState.AddModelError("ShippingState", string.Format("Suggested Address: {0}", addresses.First().components.state_abbreviation));
+                            ModelState.AddModelError("BillingState", string.Format("Suggested Address: {0}", addresses.First().components.state_abbreviation));
                             addressValidationSuccessful = false;
                         }
                     }

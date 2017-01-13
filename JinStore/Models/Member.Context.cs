@@ -27,13 +27,10 @@ namespace JinStore.Models
     
         public virtual DbSet<CustomerList> CustomerLists { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
-        public virtual DbSet<Review> Reviews { get; set; }
         public virtual DbSet<ServiceItem> ServiceItems { get; set; }
         public virtual DbSet<webpages_Membership> webpages_Membership { get; set; }
         public virtual DbSet<webpages_OAuthMembership> webpages_OAuthMembership { get; set; }
         public virtual DbSet<webpages_Roles> webpages_Roles { get; set; }
-        public virtual DbSet<CustomerProfile> CustomerProfiles { get; set; }
         public virtual DbSet<Cart> Carts { get; set; }
-        public virtual DbSet<Contact> Contacts { get; set; }
     }
 }

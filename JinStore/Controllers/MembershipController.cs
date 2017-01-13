@@ -27,7 +27,7 @@ namespace JinStore.Controllers
             string publicKey = ConfigurationManager.AppSettings["Braintree.PublicKey"];
             string privateKey = ConfigurationManager.AppSettings["Braintree.PrivateKey"];
             string environment = ConfigurationManager.AppSettings["Braintree.Environment"];
-            string merchantId = ConfigurationManager.AppSettings["Braintree.MerchantId"];
+            string merchantId = ConfigurationManager.AppSettings["Braintree.MerchantID"];
 
             Braintree.BraintreeGateway braintree = new Braintree.BraintreeGateway(environment, merchantId, publicKey, privateKey);
             int userId = -1;
@@ -133,7 +133,7 @@ namespace JinStore.Controllers
                     string publicKey = ConfigurationManager.AppSettings["Braintree.PublicKey"];
                     string privateKey = ConfigurationManager.AppSettings["Braintree.PrivateKey"];
                     string environment = ConfigurationManager.AppSettings["Braintree.Environment"];
-                    string merchantId = ConfigurationManager.AppSettings["Braintree.MerchantId"];
+                    string merchantId = ConfigurationManager.AppSettings["Braintree.MerhcantID"];
                     
                     
                     Braintree.BraintreeGateway braintree = new Braintree.BraintreeGateway(environment, merchantId, publicKey, privateKey);

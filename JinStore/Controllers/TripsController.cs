@@ -57,8 +57,6 @@ namespace JinStore.Controllers
                         AdultCount = adultCount,
                     },
                     Slice = slices
-
-
                 }
             };
             TripsResource.SearchRequest r = new TripsResource.SearchRequest(service, request);

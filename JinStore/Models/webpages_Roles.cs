@@ -14,16 +14,7 @@ namespace JinStore.Models
     
     public partial class webpages_Roles
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public webpages_Roles()
-        {
-            this.CustomerLists = new HashSet<CustomerList>();
-        }
-    
         public int RoleId { get; set; }
         public string RoleName { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CustomerList> CustomerLists { get; set; }
     }
 }

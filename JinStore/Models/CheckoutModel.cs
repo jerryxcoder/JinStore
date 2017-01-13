@@ -8,6 +8,8 @@ namespace JinStore.Models
 {
     public class CheckoutModel
     {
+        public string ID { get; set; }
+
         [Required]
         public string FirstName { get; set; }
         [Required]

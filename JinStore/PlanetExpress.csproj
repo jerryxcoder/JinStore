@@ -208,14 +208,8 @@
       <DependentUpon>Member.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CheckoutModel.cs" />
-    <Compile Include="Models\Contact.cs">
-      <DependentUpon>Member.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\ContactModel.cs" />
     <Compile Include="Models\CustomerList.cs">
-      <DependentUpon>Member.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\CustomerProfile.cs">
       <DependentUpon>Member.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Member.Context.cs">
@@ -240,9 +234,6 @@
     </Compile>
     <Compile Include="Models\PaymentModel.cs" />
     <Compile Include="Models\Product.cs" />
-    <Compile Include="Models\Review.cs">
-      <DependentUpon>Member.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\ServiceItem.cs">
       <DependentUpon>Member.tt</DependentUpon>
     </Compile>

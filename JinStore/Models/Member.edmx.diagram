@@ -5,17 +5,14 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="db2450ff9bdd46b09321f01bc1511e05" Name="Diagram1">
-        <EntityTypeShape EntityType="MemberModel.CustomerList" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MemberModel.Order" Width="1.5" PointX="2.625" PointY="3.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="MemberModel.Review" Width="1.5" PointX="4.5" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MemberModel.ServiceItem" Width="1.5" PointX="4.625" PointY="2.75" />
-        <EntityTypeShape EntityType="MemberModel.webpages_Membership" Width="1.5" PointX="4.625" PointY="4.875" />
-        <EntityTypeShape EntityType="MemberModel.webpages_OAuthMembership" Width="1.5" PointX="6.5" PointY="4.375" />
-        <EntityTypeShape EntityType="MemberModel.webpages_Roles" Width="1.5" PointX="0.5" PointY="5.25" />
+        <EntityTypeShape EntityType="MemberModel.CustomerList" Width="1.5" PointX="0.75" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MemberModel.Order" Width="1.5" PointX="4.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MemberModel.ServiceItem" Width="1.5" PointX="6.5" PointY="2.25" />
+        <EntityTypeShape EntityType="MemberModel.webpages_Membership" Width="1.5" PointX="6.5" PointY="4" />
+        <EntityTypeShape EntityType="MemberModel.webpages_OAuthMembership" Width="1.5" PointX="6.5" PointY="0.5" />
+        <EntityTypeShape EntityType="MemberModel.webpages_Roles" Width="1.5" PointX="0.625" PointY="6.125" />
+        <EntityTypeShape EntityType="MemberModel.Cart" Width="1.5" PointX="2.625" PointY="0.5" />
         <AssociationConnector Association="MemberModel.webpages_UsersInRoles" />
-        <EntityTypeShape EntityType="MemberModel.CustomerProfile" Width="1.5" PointX="2.625" PointY="0.5" />
-        <EntityTypeShape EntityType="MemberModel.Cart" Width="1.5" PointX="6.375" PointY="1" />
-        <EntityTypeShape EntityType="MemberModel.Contact" Width="1.5" PointX="8" PointY="2.25" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
