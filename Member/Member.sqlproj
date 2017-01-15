@@ -65,15 +65,10 @@
   <ItemGroup>
     <Build Include="dbo\Tables\Orders.sql" />
     <Build Include="dbo\Tables\CustomerList.sql" />
-    <Build Include="dbo\Tables\CustomerProfile.sql" />
-    <Build Include="dbo\Tables\Review.sql" />
     <Build Include="dbo\Tables\webpages_UsersInRoles.sql" />
     <Build Include="dbo\Tables\webpages_Roles.sql" />
     <Build Include="dbo\Tables\webpages_OAuthMembership.sql" />
     <Build Include="dbo\Tables\webpages_Membership.sql" />
-    <Build Include="dbo\Tables\ServiceItem.sql" />
     <Build Include="dbo\Tables\Cart.sql" />
-    <Build Include="dbo\Tables\Table.sql" />
-    <Build Include="dbo\Tables\Contact.sql" />
   </ItemGroup>
 </Project>

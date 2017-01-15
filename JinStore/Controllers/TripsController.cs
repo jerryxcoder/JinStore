@@ -69,7 +69,7 @@ namespace JinStore.Controllers
         {
             Cart ticket = new Cart();
             ticket.origin = origin;
-            ticket.TicketID = id;
+            ticket.TicketId = id;
             ticket.destination = destination;
             ticket.departureTime = departureTime;
             ticket.arrivalTime = arrivalTime;
@@ -82,8 +82,6 @@ namespace JinStore.Controllers
                 entities.SaveChanges();
             }
             
-
-
             return ticket.Id;
         }
 

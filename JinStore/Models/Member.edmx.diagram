@@ -4,16 +4,16 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="db2450ff9bdd46b09321f01bc1511e05" Name="Diagram1">
-        <EntityTypeShape EntityType="MemberModel.CustomerList" Width="1.5" PointX="0.75" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MemberModel.Order" Width="1.5" PointX="4.5" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MemberModel.ServiceItem" Width="1.5" PointX="6.5" PointY="2.25" />
-        <EntityTypeShape EntityType="MemberModel.webpages_Membership" Width="1.5" PointX="6.5" PointY="4" />
-        <EntityTypeShape EntityType="MemberModel.webpages_OAuthMembership" Width="1.5" PointX="6.5" PointY="0.5" />
-        <EntityTypeShape EntityType="MemberModel.webpages_Roles" Width="1.5" PointX="0.625" PointY="6.125" />
-        <EntityTypeShape EntityType="MemberModel.Cart" Width="1.5" PointX="2.625" PointY="0.5" />
-        <AssociationConnector Association="MemberModel.webpages_UsersInRoles" />
-      </Diagram>
+      <Diagram DiagramId="38883fca580241a693e3bb2440fdb5fa" Name="Diagram1">
+        <EntityTypeShape EntityType="MemberModel.CustomerList" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="MemberModel.webpages_Membership" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MemberModel.webpages_OAuthMembership" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MemberModel.webpages_Roles" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <AssociationConnector Association="MemberModel.webpages_UsersInRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="MemberModel.Cart" Width="1.5" PointX="5.375" PointY="2.25" />
+        <EntityTypeShape EntityType="MemberModel.Order" Width="1.5" PointX="7.625" PointY="1.125" />
+        <AssociationConnector Association="MemberModel.FK_Orders_Cart" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

@@ -193,7 +193,6 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
-    <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Controllers\MembershipController.cs" />
@@ -208,10 +207,10 @@
       <DependentUpon>Member.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CheckoutModel.cs" />
-    <Compile Include="Models\ContactModel.cs" />
     <Compile Include="Models\CustomerList.cs">
       <DependentUpon>Member.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CartModel.cs" />
     <Compile Include="Models\Member.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -234,9 +233,6 @@
     </Compile>
     <Compile Include="Models\PaymentModel.cs" />
     <Compile Include="Models\Product.cs" />
-    <Compile Include="Models\ServiceItem.cs">
-      <DependentUpon>Member.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="App_Start\UserService.cs" />
     <Compile Include="Models\webpages_Membership.cs">

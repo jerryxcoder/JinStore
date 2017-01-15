@@ -14,32 +14,21 @@ namespace JinStore.Models
     
     public partial class Cart
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Cart()
+        {
+            this.Orders = new HashSet<Order>();
+        }
+    
         public System.Guid Id { get; set; }
-        public string TicketID { get; set; }
+        public string TicketId { get; set; }
         public string origin { get; set; }
         public string destination { get; set; }
         public string departureTime { get; set; }
         public string arrivalTime { get; set; }
-        public Nullable<decimal> saleTotal { get; set; }
-        public string carrier { get; set; }
-        public string number { get; set; }
-        public Nullable<int> NumStops { get; set; }
-        public string EmailAddress { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string PhoneNumber { get; set; }
-        public string CreditCardNumber { get; set; }
-        public string CreditCardName { get; set; }
-        public string CVV { get; set; }
-        public string BillingStreet1 { get; set; }
-        public string BillingStreet2 { get; set; }
-        public string BillingCity { get; set; }
-        public string BillingState { get; set; }
-        public string BillingPostalCode { get; set; }
-        public string BillingReceipient { get; set; }
-        public Nullable<System.DateTime> CreditCardExpirationDate { get; set; }
-        public Nullable<int> Stops { get; set; }
-        public Nullable<int> CreditCardExpirationMonth { get; set; }
-        public Nullable<int> CreditCardExpirationYear { get; set; }
+        public Nullable<System.DateTime> dateCreated { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

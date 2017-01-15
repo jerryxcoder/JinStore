@@ -10,30 +10,12 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="TicketID" Type="nvarchar" MaxLength="50" />
+          <Property Name="TicketId" Type="nvarchar" MaxLength="50" />
           <Property Name="origin" Type="nvarchar" MaxLength="50" />
           <Property Name="destination" Type="nvarchar" MaxLength="50" />
           <Property Name="departureTime" Type="nvarchar" MaxLength="50" />
           <Property Name="arrivalTime" Type="nvarchar" MaxLength="50" />
-          <Property Name="saleTotal" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="carrier" Type="nvarchar" MaxLength="50" />
-          <Property Name="number" Type="nchar" MaxLength="10" />
-          <Property Name="Stops" Type="int" />
-          <Property Name="EmailAddress" Type="nvarchar" MaxLength="100" />
-          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
-          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
-          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" />
-          <Property Name="CreditCardNumber" Type="nvarchar" MaxLength="50" />
-          <Property Name="CreditCardName" Type="nvarchar" MaxLength="50" />
-          <Property Name="CVV" Type="nvarchar" MaxLength="50" />
-          <Property Name="BillingStreet1" Type="nvarchar" MaxLength="50" />
-          <Property Name="BillingStreet2" Type="nvarchar" MaxLength="50" />
-          <Property Name="BillingCity" Type="nvarchar" MaxLength="50" />
-          <Property Name="BillingState" Type="nvarchar" MaxLength="50" />
-          <Property Name="BillingPostalCode" Type="nvarchar" MaxLength="50" />
-          <Property Name="BillingReceipient" Type="nvarchar" MaxLength="50" />
-          <Property Name="CreditCardExpirationMonth" Type="int" />
-          <Property Name="CreditCardExpirationYear" Type="int" />
+          <Property Name="dateCreated" Type="datetime" />
         </EntityType>
         <EntityType Name="CustomerList">
           <Key>
@@ -45,34 +27,41 @@
           <Property Name="DateCreated" Type="datetime" Nullable="false" />
           <Property Name="DateLastModified" Type="datetime" Nullable="false" />
           <Property Name="EmailAddress" Type="nvarchar" MaxLength="500" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Orders">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="TicketID" Type="nvarchar" MaxLength="50" />
-          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
-          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
           <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" />
           <Property Name="CreditCardNumber" Type="nvarchar" MaxLength="50" />
           <Property Name="CreditCardName" Type="nvarchar" MaxLength="50" />
           <Property Name="CVV" Type="nvarchar" MaxLength="50" />
-          <Property Name="EmailAddress" Type="nvarchar" MaxLength="50" />
           <Property Name="CreditCardExpirationDate" Type="datetime" />
-          <Property Name="origin" Type="nvarchar" MaxLength="50" />
-          <Property Name="destination" Type="nvarchar" MaxLength="50" />
-          <Property Name="departureTime" Type="nvarchar" MaxLength="50" />
-          <Property Name="arrivalTime" Type="nvarchar" MaxLength="50" />
-          <Property Name="saleTotal" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="carrier" Type="nvarchar" MaxLength="50" />
-          <Property Name="number" Type="nchar" MaxLength="10" />
           <Property Name="BillingStreet1" Type="nvarchar" MaxLength="50" />
           <Property Name="BillingStreet2" Type="nvarchar" MaxLength="50" />
           <Property Name="BillingCity" Type="nvarchar" MaxLength="50" />
           <Property Name="BillingState" Type="nvarchar" MaxLength="50" />
           <Property Name="BillingPostalCode" Type="nvarchar" MaxLength="50" />
           <Property Name="BillingReceipient" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="100" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateLastModified" Type="datetime" Nullable="false" />
+          <Property Name="EmailAddress" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreditCardNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreditCardName" Type="nvarchar" MaxLength="50" />
+          <Property Name="CVV" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreditCardExpirationDate" Type="datetime" />
+          <Property Name="BillingStreet1" Type="nvarchar" MaxLength="50" />
+          <Property Name="BillingStreet2" Type="nvarchar" MaxLength="50" />
+          <Property Name="BillingCity" Type="nvarchar" MaxLength="50" />
+          <Property Name="BillingState" Type="nvarchar" MaxLength="50" />
+          <Property Name="BillingPostalCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="BillingReceipient" Type="nvarchar" MaxLength="50" />
+          <Property Name="TicketId" Type="nvarchar" MaxLength="50" />
+          <Property Name="OrderId" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="webpages_Membership">
           <Key>
@@ -114,6 +103,18 @@
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="RoleId" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Orders_Cart">
+          <End Role="Cart" Type="Self.Cart" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cart">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_RoleId">
           <End Role="webpages_Roles" Type="Self.webpages_Roles" Multiplicity="1" />
           <End Role="webpages_UsersInRoles" Type="Self.webpages_UsersInRoles" Multiplicity="*" />
@@ -146,6 +147,10 @@
           <EntitySet Name="webpages_OAuthMembership" EntityType="Self.webpages_OAuthMembership" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="webpages_Roles" EntityType="Self.webpages_Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="webpages_UsersInRoles" EntityType="Self.webpages_UsersInRoles" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Orders_Cart" Association="Self.FK_Orders_Cart">
+            <End Role="Cart" EntitySet="Cart" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
           <AssociationSet Name="fk_RoleId" Association="Self.fk_RoleId">
             <End Role="webpages_Roles" EntitySet="webpages_Roles" />
             <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
@@ -168,56 +173,19 @@
           <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateLastModified" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="EmailAddress" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="Order">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="TicketID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EmailAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreditCardNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreditCardName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CVV" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="EmailAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreditCardExpirationDate" Type="DateTime" Precision="3" />
-          <Property Name="origin" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="destination" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="departureTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="arrivalTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="saleTotal" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="carrier" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="number" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="BillingStreet1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="BillingStreet2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="BillingCity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="BillingState" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="BillingPostalCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="BillingReceipient" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityContainer Name="MemberEntities1" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="CustomerLists" EntityType="Self.CustomerList" />
-          <EntitySet Name="Orders" EntityType="Self.Order" />
-          <EntitySet Name="ServiceItems" EntityType="MemberModel.ServiceItem" />
-          <EntitySet Name="webpages_Membership" EntityType="MemberModel.webpages_Membership" />
-          <EntitySet Name="webpages_OAuthMembership" EntityType="MemberModel.webpages_OAuthMembership" />
-          <EntitySet Name="webpages_Roles" EntityType="MemberModel.webpages_Roles" />
-          <EntitySet Name="Carts" EntityType="MemberModel.Cart" />
-          <AssociationSet Name="webpages_UsersInRoles" Association="MemberModel.webpages_UsersInRoles">
-            <End Role="webpages_Roles" EntitySet="webpages_Roles" />
-            <End Role="CustomerList" EntitySet="CustomerLists" />
-          </AssociationSet>
-        </EntityContainer>
-        <EntityType Name="ServiceItem">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="ItemName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="webpages_Roles" Relationship="Self.webpages_UsersInRoles" FromRole="CustomerList" ToRole="webpages_Roles" />
         </EntityType>
         <EntityType Name="webpages_Membership">
           <Key>
@@ -229,9 +197,9 @@
           <Property Name="IsConfirmed" Type="Boolean" />
           <Property Name="LastPasswordFailureDate" Type="DateTime" Precision="3" />
           <Property Name="PasswordFailuresSinceLastSuccess" Type="Int32" Nullable="false" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="PasswordChangedDate" Type="DateTime" Precision="3" />
-          <Property Name="PasswordSalt" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordSalt" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="PasswordVerificationToken" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="PasswordVerificationTokenExpirationDate" Type="DateTime" Precision="3" />
         </EntityType>
@@ -240,8 +208,8 @@
             <PropertyRef Name="Provider" />
             <PropertyRef Name="ProviderUserId" />
           </Key>
-          <Property Name="Provider" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="ProviderUserId" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Provider" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderUserId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="UserId" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="webpages_Roles">
@@ -249,45 +217,80 @@
             <PropertyRef Name="RoleId" />
           </Key>
           <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="RoleName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="CustomerLists" Relationship="Self.webpages_UsersInRoles" FromRole="webpages_Roles" ToRole="CustomerList" />
         </EntityType>
+        <Association Name="webpages_UsersInRoles">
+          <End Role="webpages_Roles" Type="Self.webpages_Roles" Multiplicity="*" />
+          <End Role="CustomerList" Type="Self.CustomerList" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="MemberEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CustomerLists" EntityType="Self.CustomerList" />
+          <EntitySet Name="webpages_Membership" EntityType="Self.webpages_Membership" />
+          <EntitySet Name="webpages_OAuthMembership" EntityType="Self.webpages_OAuthMembership" />
+          <EntitySet Name="webpages_Roles" EntityType="Self.webpages_Roles" />
+          <AssociationSet Name="webpages_UsersInRoles" Association="Self.webpages_UsersInRoles">
+            <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+            <End Role="CustomerList" EntitySet="CustomerLists" />
+          </AssociationSet>
+          <EntitySet Name="Carts" EntityType="MemberModel.Cart" />
+          <EntitySet Name="Orders" EntityType="MemberModel.Order" />
+          <AssociationSet Name="FK_Orders_Cart" Association="MemberModel.FK_Orders_Cart">
+            <End Role="Cart" EntitySet="Carts" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="Cart">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="TicketID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TicketId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="origin" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="destination" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="departureTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="arrivalTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="saleTotal" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="carrier" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="number" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="NumStops" Type="Int32" />
-          <Property Name="EmailAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="dateCreated" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Orders" Relationship="MemberModel.FK_Orders_Cart" FromRole="Cart" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateLastModified" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EmailAddress" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreditCardNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CreditCardName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CVV" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreditCardExpirationDate" Type="DateTime" Precision="3" />
           <Property Name="BillingStreet1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="BillingStreet2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="BillingCity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="BillingState" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="BillingPostalCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="BillingReceipient" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreditCardExpirationDate" Type="DateTime" Precision="3" />
-          <Property Name="Stops" Type="Int32" />
-          <Property Name="CreditCardExpirationMonth" Type="Int32" />
-          <Property Name="CreditCardExpirationYear" Type="Int32" />
+          <Property Name="TicketId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OrderId" Type="Guid" />
+          <NavigationProperty Name="Cart" Relationship="MemberModel.FK_Orders_Cart" FromRole="Order" ToRole="Cart" />
         </EntityType>
-        <Association Name="webpages_UsersInRoles">
-          <End Type="MemberModel.webpages_Roles" Role="webpages_Roles" Multiplicity="*" />
-          <End Type="MemberModel.CustomerList" Role="CustomerList" Multiplicity="*" />
+        <Association Name="FK_Orders_Cart">
+          <End Type="MemberModel.Cart" Role="Cart" Multiplicity="0..1" />
+          <End Type="MemberModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cart">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -296,117 +299,106 @@
           <EntitySetMapping Name="CustomerLists">
             <EntityTypeMapping TypeName="MemberModel.CustomerList">
               <MappingFragment StoreEntitySet="CustomerList">
-                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
                 <ScalarProperty Name="DateLastModified" ColumnName="DateLastModified" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Orders">
-            <EntityTypeMapping TypeName="MemberModel.Order">
-              <MappingFragment StoreEntitySet="Orders">
-                <ScalarProperty Name="BillingReceipient" ColumnName="BillingReceipient" />
-                <ScalarProperty Name="BillingPostalCode" ColumnName="BillingPostalCode" />
-                <ScalarProperty Name="BillingState" ColumnName="BillingState" />
-                <ScalarProperty Name="BillingCity" ColumnName="BillingCity" />
-                <ScalarProperty Name="BillingStreet2" ColumnName="BillingStreet2" />
-                <ScalarProperty Name="BillingStreet1" ColumnName="BillingStreet1" />
-                <ScalarProperty Name="number" ColumnName="number" />
-                <ScalarProperty Name="carrier" ColumnName="carrier" />
-                <ScalarProperty Name="saleTotal" ColumnName="saleTotal" />
-                <ScalarProperty Name="arrivalTime" ColumnName="arrivalTime" />
-                <ScalarProperty Name="departureTime" ColumnName="departureTime" />
-                <ScalarProperty Name="destination" ColumnName="destination" />
-                <ScalarProperty Name="origin" ColumnName="origin" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="TicketID" ColumnName="TicketID" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
                 <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
                 <ScalarProperty Name="CreditCardNumber" ColumnName="CreditCardNumber" />
                 <ScalarProperty Name="CreditCardName" ColumnName="CreditCardName" />
                 <ScalarProperty Name="CVV" ColumnName="CVV" />
-                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
                 <ScalarProperty Name="CreditCardExpirationDate" ColumnName="CreditCardExpirationDate" />
+                <ScalarProperty Name="BillingStreet1" ColumnName="BillingStreet1" />
+                <ScalarProperty Name="BillingStreet2" ColumnName="BillingStreet2" />
+                <ScalarProperty Name="BillingCity" ColumnName="BillingCity" />
+                <ScalarProperty Name="BillingState" ColumnName="BillingState" />
+                <ScalarProperty Name="BillingPostalCode" ColumnName="BillingPostalCode" />
+                <ScalarProperty Name="BillingReceipient" ColumnName="BillingReceipient" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="webpages_Membership">
             <EntityTypeMapping TypeName="MemberModel.webpages_Membership">
               <MappingFragment StoreEntitySet="webpages_Membership">
-                <ScalarProperty Name="PasswordVerificationTokenExpirationDate" ColumnName="PasswordVerificationTokenExpirationDate" />
-                <ScalarProperty Name="PasswordVerificationToken" ColumnName="PasswordVerificationToken" />
-                <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
-                <ScalarProperty Name="PasswordChangedDate" ColumnName="PasswordChangedDate" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="PasswordFailuresSinceLastSuccess" ColumnName="PasswordFailuresSinceLastSuccess" />
-                <ScalarProperty Name="LastPasswordFailureDate" ColumnName="LastPasswordFailureDate" />
-                <ScalarProperty Name="IsConfirmed" ColumnName="IsConfirmed" />
-                <ScalarProperty Name="ConfirmationToken" ColumnName="ConfirmationToken" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ConfirmationToken" ColumnName="ConfirmationToken" />
+                <ScalarProperty Name="IsConfirmed" ColumnName="IsConfirmed" />
+                <ScalarProperty Name="LastPasswordFailureDate" ColumnName="LastPasswordFailureDate" />
+                <ScalarProperty Name="PasswordFailuresSinceLastSuccess" ColumnName="PasswordFailuresSinceLastSuccess" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="PasswordChangedDate" ColumnName="PasswordChangedDate" />
+                <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+                <ScalarProperty Name="PasswordVerificationToken" ColumnName="PasswordVerificationToken" />
+                <ScalarProperty Name="PasswordVerificationTokenExpirationDate" ColumnName="PasswordVerificationTokenExpirationDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="webpages_OAuthMembership">
             <EntityTypeMapping TypeName="MemberModel.webpages_OAuthMembership">
               <MappingFragment StoreEntitySet="webpages_OAuthMembership">
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ProviderUserId" ColumnName="ProviderUserId" />
                 <ScalarProperty Name="Provider" ColumnName="Provider" />
+                <ScalarProperty Name="ProviderUserId" ColumnName="ProviderUserId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="webpages_Roles">
             <EntityTypeMapping TypeName="MemberModel.webpages_Roles">
               <MappingFragment StoreEntitySet="webpages_Roles">
-                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <AssociationSetMapping Name="webpages_UsersInRoles" TypeName="MemberModel.webpages_UsersInRoles" StoreEntitySet="webpages_UsersInRoles">
+            <EndProperty Name="webpages_Roles">
+              <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="CustomerList">
+              <ScalarProperty Name="ID" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
           <EntitySetMapping Name="Carts">
             <EntityTypeMapping TypeName="MemberModel.Cart">
               <MappingFragment StoreEntitySet="Cart">
-                <ScalarProperty Name="CreditCardExpirationYear" ColumnName="CreditCardExpirationYear" />
-                <ScalarProperty Name="CreditCardExpirationMonth" ColumnName="CreditCardExpirationMonth" />
-                <ScalarProperty Name="Stops" ColumnName="Stops" />
+                <ScalarProperty Name="dateCreated" ColumnName="dateCreated" />
+                <ScalarProperty Name="arrivalTime" ColumnName="arrivalTime" />
+                <ScalarProperty Name="departureTime" ColumnName="departureTime" />
+                <ScalarProperty Name="destination" ColumnName="destination" />
+                <ScalarProperty Name="origin" ColumnName="origin" />
+                <ScalarProperty Name="TicketId" ColumnName="TicketId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="MemberModel.Order">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="TicketId" ColumnName="TicketId" />
                 <ScalarProperty Name="BillingReceipient" ColumnName="BillingReceipient" />
                 <ScalarProperty Name="BillingPostalCode" ColumnName="BillingPostalCode" />
                 <ScalarProperty Name="BillingState" ColumnName="BillingState" />
                 <ScalarProperty Name="BillingCity" ColumnName="BillingCity" />
                 <ScalarProperty Name="BillingStreet2" ColumnName="BillingStreet2" />
                 <ScalarProperty Name="BillingStreet1" ColumnName="BillingStreet1" />
+                <ScalarProperty Name="CreditCardExpirationDate" ColumnName="CreditCardExpirationDate" />
                 <ScalarProperty Name="CVV" ColumnName="CVV" />
                 <ScalarProperty Name="CreditCardName" ColumnName="CreditCardName" />
                 <ScalarProperty Name="CreditCardNumber" ColumnName="CreditCardNumber" />
                 <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="DateLastModified" ColumnName="DateLastModified" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
-                <ScalarProperty Name="number" ColumnName="number" />
-                <ScalarProperty Name="carrier" ColumnName="carrier" />
-                <ScalarProperty Name="saleTotal" ColumnName="saleTotal" />
-                <ScalarProperty Name="arrivalTime" ColumnName="arrivalTime" />
-                <ScalarProperty Name="departureTime" ColumnName="departureTime" />
-                <ScalarProperty Name="destination" ColumnName="destination" />
-                <ScalarProperty Name="origin" ColumnName="origin" />
-                <ScalarProperty Name="TicketID" ColumnName="TicketID" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="webpages_UsersInRoles" TypeName="MemberModel.webpages_UsersInRoles" StoreEntitySet="webpages_UsersInRoles">
-            <EndProperty Name="CustomerList">
-              <ScalarProperty Name="ID" ColumnName="UserId" />
-            </EndProperty>
-            <EndProperty Name="webpages_Roles">
-              <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-            </EndProperty>
-          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
-namespace CodingTemple.ShoeStore.Mvc.Controllers
+namespace JinStore.Controllers
 {
     public class CheckoutController : Controller
     {
@@ -16,35 +16,48 @@ namespace CodingTemple.ShoeStore.Mvc.Controllers
         public ActionResult Index(Guid? id)
         {
 
-            CheckoutModel model = new CheckoutModel();
+            CheckoutModel model2 = new CheckoutModel();
 
             using (MemberEntities1 entities = new MemberEntities1())
             {
-                //int orderId = int.Parse(Request.Cookies["TicketID"].Value);
-                var order = entities.Carts.Single(x => x.Id == id);
-                model.FirstName = order.FirstName;
-                model.LastName = order.LastName;
-                model.EmailAddress = order.EmailAddress;
-                model.CreditCardVerificationValue = order.CVV;
-                model.CreditCardExpirationMonth = order.CreditCardExpirationDate.HasValue ? order.CreditCardExpirationDate.Value.Month : 1;
-                model.CreditCardExpirationYear = order.CreditCardExpirationDate.HasValue ? order.CreditCardExpirationDate.Value.Year : 1;
-                model.CreditCardNumber = order.CreditCardNumber;
-                model.CreditCardName = order.CreditCardName;
-            
+                 
+                var order = entities.Orders.Single(x => x.OrderId == id);
+
+                model2.FirstName = order.FirstName;
+                model2.LastName = order.LastName;
+                model2.EmailAddress = order.EmailAddress;
+                model2.CreditCardVerificationValue = order.CVV;
+                model2.CreditCardExpirationMonth = order.CreditCardExpirationDate.HasValue ? order.CreditCardExpirationDate.Value.Month : 1;
+                model2.CreditCardExpirationYear = order.CreditCardExpirationDate.HasValue ? order.CreditCardExpirationDate.Value.Year : 1;
+                model2.CreditCardNumber = order.CreditCardNumber;
+                model2.CreditCardName = order.CreditCardName;
+                model2.ticketID = order.TicketId;
+                model2.origin = order.Cart.origin;
+                model2.destination = order.Cart.destination;
+                model2.departureTime = order.Cart.departureTime;
+                model2.arrivalTime = order.Cart.arrivalTime;
+                //model2.CartItem = order.Cart.se(x => new CartModel
+                //{
+                //    origin = x.origin,
+                //    destination = x.destination,
+                //    departureTime = x.departureTime,
+                //    arrivalTime = x.arrivalTime
+
+                //}).ToArray();
             }
 
 
-            return View(model);
+            return View(model2);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(CheckoutModel model)
+        public async Task<ActionResult> Index(CheckoutModel model2)
         {
             using (MemberEntities1 entities = new MemberEntities1())
             {
                 //int orderId = int.Parse(Request.Cookies["OrderID"].Value);
-                var o = entities.Carts.Single(x => x.EmailAddress == model.EmailAddress);
+                var o = entities.Orders.Single(x => x.EmailAddress == model2.EmailAddress);
               
                 if (ModelState.IsValid)
                 {
@@ -55,7 +68,7 @@ namespace CodingTemple.ShoeStore.Mvc.Controllers
                     string smartyStreetsAuthToken = ConfigurationManager.AppSettings["SmartyStreets.AuthToken"];
 
                     Rentler.SmartyStreets.SmartyStreetsClient client = new Rentler.SmartyStreets.SmartyStreetsClient(smartyStreetsAuthId, smartyStreetsAuthToken);
-                    var addresses = await client.GetStreetAddressAsync(model.BillingStreet1, null, model.BillingStreet2, model.BillingCity, model.BillingState, model.BillingPostalCode);
+                    var addresses = await client.GetStreetAddressAsync(model2.BillingStreet1, null, model2.BillingStreet2, model2.BillingCity, model2.BillingState, model2.BillingPostalCode);
                     if (addresses.Count() == 0)
                     {
                         ModelState.AddModelError("BillingStreet1", "Could not find exact or similiar address");
@@ -63,27 +76,27 @@ namespace CodingTemple.ShoeStore.Mvc.Controllers
                     }
                     else
                     {
-                        if (!string.IsNullOrEmpty(model.BillingStreet1) && addresses.First().delivery_line_1 != model.BillingStreet1)
+                        if (!string.IsNullOrEmpty(model2.BillingStreet1) && addresses.First().delivery_line_1 != model2.BillingStreet1)
                         {
                             ModelState.AddModelError("BillingStreet1", string.Format("Suggested Address: {0}", addresses.First().delivery_line_1));
                             addressValidationSuccessful = false;
                         }
-                        if (!string.IsNullOrEmpty(model.BillingStreet2) && addresses.First().delivery_line_2 != model.BillingStreet2)
+                        if (!string.IsNullOrEmpty(model2.BillingStreet2) && addresses.First().delivery_line_2 != model2.BillingStreet2)
                         {
                             ModelState.AddModelError("BillingStreet2", string.Format("Suggested Address: {0}", addresses.First().delivery_line_2));
                             addressValidationSuccessful = false;
                         }
-                        if (!string.IsNullOrEmpty(model.BillingCity) && addresses.First().components.city_name != model.BillingCity)
+                        if (!string.IsNullOrEmpty(model2.BillingCity) && addresses.First().components.city_name != model2.BillingCity)
                         {
                             ModelState.AddModelError("BillingCity", string.Format("Suggested Address: {0}", addresses.First().components.city_name));
                             addressValidationSuccessful = false;
                         }
-                        if (!string.IsNullOrEmpty(model.BillingPostalCode) && addresses.First().components.zipcode != model.BillingPostalCode)
+                        if (!string.IsNullOrEmpty(model2.BillingPostalCode) && addresses.First().components.zipcode != model2.BillingPostalCode)
                         {
                             ModelState.AddModelError("BillingPostalCode", string.Format("Suggested Address: {0}", addresses.First().components.zipcode));
                             addressValidationSuccessful = false;
                         }
-                        if (!string.IsNullOrEmpty(model.BillingState) && addresses.First().components.state_abbreviation != model.BillingState)
+                        if (!string.IsNullOrEmpty(model2.BillingState) && addresses.First().components.state_abbreviation != model2.BillingState)
                         {
                             ModelState.AddModelError("BillingState", string.Format("Suggested Address: {0}", addresses.First().components.state_abbreviation));
                             addressValidationSuccessful = false;
@@ -99,16 +112,16 @@ namespace CodingTemple.ShoeStore.Mvc.Controllers
 
                         Braintree.BraintreeGateway braintree = new Braintree.BraintreeGateway(environment, merchantId, publicKey, privateKey);
                         Braintree.CustomerRequest request = new Braintree.CustomerRequest();
-                        request.Email = model.EmailAddress;
-                        request.FirstName = model.FirstName;
-                        request.LastName = model.LastName;
-                        request.Phone = model.PhoneNumber;
+                        request.Email = model2.EmailAddress;
+                        request.FirstName = model2.FirstName;
+                        request.LastName = model2.LastName;
+                        request.Phone = model2.PhoneNumber;
                         request.CreditCard = new Braintree.CreditCardRequest();
 
-                        request.CreditCard.Number = model.CreditCardNumber;
-                        request.CreditCard.CardholderName = model.CreditCardName;
-                        request.CreditCard.ExpirationMonth = (model.CreditCardExpirationMonth).ToString().PadLeft(2, '0');
-                        request.CreditCard.ExpirationYear = model.CreditCardExpirationYear.ToString();
+                        request.CreditCard.Number = model2.CreditCardNumber;
+                        request.CreditCard.CardholderName = model2.CreditCardName;
+                        request.CreditCard.ExpirationMonth = (model2.CreditCardExpirationMonth).ToString().PadLeft(2, '0');
+                        request.CreditCard.ExpirationYear = model2.CreditCardExpirationYear.ToString();
 
 
                         var customerResult = braintree.Customer.Create(request);
@@ -119,17 +132,17 @@ namespace CodingTemple.ShoeStore.Mvc.Controllers
                         braintree.Transaction.Sale(sale);
 
 
-                        o.FirstName = model.FirstName;
-                        o.LastName = model.LastName;
-                        o.EmailAddress = model.EmailAddress;
-                        o.PhoneNumber = model.PhoneNumber;
+                        o.FirstName = model2.FirstName;
+                        o.LastName = model2.LastName;
+                        o.EmailAddress = model2.EmailAddress;
+                        o.PhoneNumber = model2.PhoneNumber;
 
-                        o.BillingCity = model.BillingCity;
-                        o.BillingPostalCode = model.BillingPostalCode;
-                        o.BillingReceipient = model.BillingReceipient;
-                        o.BillingStreet1 = model.BillingStreet1;
-                        o.BillingStreet2 = model.BillingStreet2;
-                        o.BillingState = model.BillingState;
+                        o.BillingCity = model2.BillingCity;
+                        o.BillingPostalCode = model2.BillingPostalCode;
+                        o.BillingReceipient = model2.BillingReceipient;
+                        o.BillingStreet1 = model2.BillingStreet1;
+                        o.BillingStreet2 = model2.BillingStreet2;
+                        o.BillingState = model2.BillingState;
                         entities.SaveChanges();
 
                         return RedirectToAction("Index", "Receipt", null);
@@ -137,7 +150,7 @@ namespace CodingTemple.ShoeStore.Mvc.Controllers
 
                 }
             }
-            return View(model);
+            return View(model2);
         }
     }
 }

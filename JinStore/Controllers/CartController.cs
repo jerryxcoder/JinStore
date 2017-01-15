@@ -20,15 +20,16 @@ namespace JinStore.Controllers
 
                     var order = entities.Carts.Single(x => x.Id == id);
 
-                    model.TicketID = order.TicketID;
+                    model.TicketId = order.TicketId;
                     model.origin = order.origin;
                     model.destination = order.destination;
                     model.departureTime = order.departureTime;
                     model.arrivalTime = order.arrivalTime;
+                    model.Id = order.Id;
                 }
 
             }
-            return View(model);
+             return View(model);
         }
     }
 }

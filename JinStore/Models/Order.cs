@@ -14,28 +14,26 @@ namespace JinStore.Models
     
     public partial class Order
     {
-        public int Id { get; set; }
-        public string TicketID { get; set; }
+        public int ID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public System.DateTime DateCreated { get; set; }
+        public System.DateTime DateLastModified { get; set; }
+        public string EmailAddress { get; set; }
         public string PhoneNumber { get; set; }
         public string CreditCardNumber { get; set; }
         public string CreditCardName { get; set; }
         public string CVV { get; set; }
-        public string EmailAddress { get; set; }
         public Nullable<System.DateTime> CreditCardExpirationDate { get; set; }
-        public string origin { get; set; }
-        public string destination { get; set; }
-        public string departureTime { get; set; }
-        public string arrivalTime { get; set; }
-        public Nullable<decimal> saleTotal { get; set; }
-        public string carrier { get; set; }
-        public string number { get; set; }
         public string BillingStreet1 { get; set; }
         public string BillingStreet2 { get; set; }
         public string BillingCity { get; set; }
         public string BillingState { get; set; }
         public string BillingPostalCode { get; set; }
         public string BillingReceipient { get; set; }
+        public string TicketId { get; set; }
+        public Nullable<System.Guid> OrderId { get; set; }
+    
+        public virtual Cart Cart { get; set; }
     }
 }

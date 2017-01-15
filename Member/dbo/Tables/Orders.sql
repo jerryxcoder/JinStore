@@ -1,29 +1,28 @@
 ﻿CREATE TABLE [dbo].[Orders] (
-    [Id]                       INT           NOT NULL,
-    [TicketID]                 NVARCHAR (50) NULL,
-    [FirstName]                NVARCHAR (50) NULL,
-    [LastName]                 NVARCHAR (50) NULL,
-    [PhoneNumber]              NVARCHAR (50) NULL,
-    [CreditCardNumber]         NVARCHAR (50) NULL,
-    [CreditCardName]           NVARCHAR (50) NULL,
-    [CVV]                      NVARCHAR (50) NULL,
-    [EmailAddress]             NVARCHAR (50) NULL,
-    [CreditCardExpirationDate] DATETIME      NULL,
-    [origin]                   NVARCHAR (50) NULL,
-    [destination]              NVARCHAR (50) NULL,
-    [departureTime]            NVARCHAR (50) NULL,
-    [arrivalTime]              NVARCHAR (50) NULL,
-    [saleTotal]                DECIMAL (18)  NULL,
-    [carrier]                  NVARCHAR (50) NULL,
-    [number]                   NCHAR (10)    NULL,
-    [BillingStreet1] NVARCHAR(50) NULL, 
-    [BillingStreet2] NVARCHAR(50) NULL, 
-    [BillingCity] NVARCHAR(50) NULL, 
-    [BillingState] NVARCHAR(50) NULL, 
-    [BillingPostalCode] NVARCHAR(50) NULL, 
-    [BillingReceipient] NVARCHAR(50) NULL, 
-    PRIMARY KEY CLUSTERED ([Id] ASC)
+    [ID]                       INT              IDENTITY (1, 1) NOT NULL,
+    [FirstName]                NVARCHAR (100)   NULL,
+    [LastName]                 NVARCHAR (100)   NULL,
+    [DateCreated]              DATETIME         DEFAULT (getutcdate()) NOT NULL,
+    [DateLastModified]         DATETIME         DEFAULT (getutcdate()) NOT NULL,
+    [EmailAddress]             NVARCHAR (500)   NOT NULL,
+    [PhoneNumber]              NVARCHAR (50)    NULL,
+    [CreditCardNumber]         NVARCHAR (50)    NULL,
+    [CreditCardName]           NVARCHAR (50)    NULL,
+    [CVV]                      NVARCHAR (50)    NULL,
+    [CreditCardExpirationDate] DATETIME         NULL,
+    [BillingStreet1]           NVARCHAR (50)    NULL,
+    [BillingStreet2]           NVARCHAR (50)    NULL,
+    [BillingCity]              NVARCHAR (50)    NULL,
+    [BillingState]             NVARCHAR (50)    NULL,
+    [BillingPostalCode]        NVARCHAR (50)    NULL,
+    [BillingReceipient]        NVARCHAR (50)    NULL,
+    [TicketId]                 NVARCHAR (50)    NULL,
+    [OrderId]                  UNIQUEIDENTIFIER NULL,
+    PRIMARY KEY CLUSTERED ([ID] ASC),
+    CONSTRAINT [FK_Orders_Cart] FOREIGN KEY ([OrderId]) REFERENCES [dbo].[Cart] ([Id])
 );
+
+
 
 
 
