@@ -26,10 +26,16 @@ namespace JinStore.Controllers
                     model.departureTime = order.departureTime;
                     model.arrivalTime = order.arrivalTime;
                     model.Id = order.Id;
+                    model.saleTotal = order.saleTotal;
+                    model.stops = order.stops;
+                    model.carrier = order.carrier;
+                    model.number = order.number;
+                    model.adultCount = order.adultCount;
                 }
 
             }
              return View(model);
         }
+        
     }
 }

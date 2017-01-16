@@ -21,21 +21,21 @@ namespace JinStore.Controllers
             using (MemberEntities1 entities = new MemberEntities1())
             {
                  
-                var order = entities.Orders.Single(x => x.OrderId == id);
+                var order = entities.Carts.Single(x => x.Id == id);
 
-                model2.FirstName = order.FirstName;
-                model2.LastName = order.LastName;
-                model2.EmailAddress = order.EmailAddress;
-                model2.CreditCardVerificationValue = order.CVV;
-                model2.CreditCardExpirationMonth = order.CreditCardExpirationDate.HasValue ? order.CreditCardExpirationDate.Value.Month : 1;
-                model2.CreditCardExpirationYear = order.CreditCardExpirationDate.HasValue ? order.CreditCardExpirationDate.Value.Year : 1;
-                model2.CreditCardNumber = order.CreditCardNumber;
-                model2.CreditCardName = order.CreditCardName;
-                model2.ticketID = order.TicketId;
-                model2.origin = order.Cart.origin;
-                model2.destination = order.Cart.destination;
-                model2.departureTime = order.Cart.departureTime;
-                model2.arrivalTime = order.Cart.arrivalTime;
+                //model2.FirstName = order.FirstName;
+                // model2.LastName = order.LastName;
+                //model2.EmailAddress = order.EmailAddress;
+                //model2.CreditCardVerificationValue = order.CVV;
+                //model2.CreditCardExpirationMonth = order.CreditCardExpirationDate.HasValue ? order.CreditCardExpirationDate.Value.Month : 1;
+                //model2.CreditCardExpirationYear = order.CreditCardExpirationDate.HasValue ? order.CreditCardExpirationDate.Value.Year : 1;
+                //model2.CreditCardNumber = order.CreditCardNumber;
+                //model2.CreditCardName = order.CreditCardName;
+                //model2.ticketID = order.TicketId;
+                model2.origin = order.origin;
+                model2.destination = order.destination;
+                model2.departureTime = order.departureTime;
+                model2.arrivalTime = order.arrivalTime;
                 //model2.CartItem = order.Cart.se(x => new CartModel
                 //{
                 //    origin = x.origin,
@@ -57,12 +57,15 @@ namespace JinStore.Controllers
             using (MemberEntities1 entities = new MemberEntities1())
             {
                 //int orderId = int.Parse(Request.Cookies["OrderID"].Value);
-                var o = entities.Orders.Single(x => x.EmailAddress == model2.EmailAddress);
+                var cart = entities.Carts.Single(x => x.Id == model2.id);
+                Order o = new Order();
+                cart.Orders.Add(o);
               
                 if (ModelState.IsValid)
                 {
 
                     bool addressValidationSuccessful = true;
+                    bool validateAddress = false;
 
                     string smartyStreetsAuthId = ConfigurationManager.AppSettings["SmartyStreets.AuthId"];
                     string smartyStreetsAuthToken = ConfigurationManager.AppSettings["SmartyStreets.AuthToken"];
@@ -102,7 +105,7 @@ namespace JinStore.Controllers
                             addressValidationSuccessful = false;
                         }
                     }
-                    if (addressValidationSuccessful)
+                    if (addressValidationSuccessful || !validateAddress)
                     {
                         //TODO: Validate the credit card - if it errors out, add a model error and display it to the user
                         string publicKey = ConfigurationManager.AppSettings["Braintree.PublicKey"];
@@ -126,7 +129,7 @@ namespace JinStore.Controllers
 
                         var customerResult = braintree.Customer.Create(request);
                         Braintree.TransactionRequest sale = new Braintree.TransactionRequest();
-                        //sale.Amount = o.OrderVariants.Sum(x => x.Variant.Product.Price * x.Quantity);
+                        sale.Amount = decimal.Parse(cart.saleTotal.Replace("USD", string.Empty));
                         sale.CustomerId = customerResult.Target.Id;
                         sale.PaymentMethodToken = customerResult.Target.DefaultPaymentMethod.Token;
                         braintree.Transaction.Sale(sale);
@@ -143,9 +146,11 @@ namespace JinStore.Controllers
                         o.BillingStreet1 = model2.BillingStreet1;
                         o.BillingStreet2 = model2.BillingStreet2;
                         o.BillingState = model2.BillingState;
+                        o.DateCreated = DateTime.UtcNow;
+                        o.DateLastModified = DateTime.UtcNow;
                         entities.SaveChanges();
 
-                        return RedirectToAction("Index", "Receipt", null);
+                        return RedirectToAction("Index", "Receipt", new { id = o.OrderId });
                     }
 
                 }

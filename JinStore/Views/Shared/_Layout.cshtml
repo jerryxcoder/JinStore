@@ -6,6 +6,7 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    
 </head>
 <body ng-app="JinStore">
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -20,10 +21,10 @@
                 <a class="navbar-brand" href="@Url.Action("Index","Home")"><img src="~/Content/img/logo.png" style="width:70px;height:30px;" /></a>
                 @*@Html.ActionLink("ZipLine", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
             </div>
-            <div class="navbar-collapse collapse">
+            <div class="navbar-collapse collapse" id="menu">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Flight", "Index", "Products")</li>
+                    <li>@Html.ActionLink("Home", "Index", "Home" ,null, new { @class = "custom" })</li>
+                    <li>@Html.ActionLink("Contact Us", "Contact", "Home")</li>
                   </ul>
                 <ul class="nav pull-right">               
                     <li>@Html.Partial("_LoginPartial")</li>

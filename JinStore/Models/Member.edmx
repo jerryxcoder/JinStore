@@ -16,6 +16,11 @@
           <Property Name="departureTime" Type="nvarchar" MaxLength="50" />
           <Property Name="arrivalTime" Type="nvarchar" MaxLength="50" />
           <Property Name="dateCreated" Type="datetime" />
+          <Property Name="stops" Type="nchar" MaxLength="10" />
+          <Property Name="saleTotal" Type="nvarchar" MaxLength="50" />
+          <Property Name="number" Type="nvarchar" MaxLength="50" />
+          <Property Name="carrier" Type="nvarchar" MaxLength="50" />
+          <Property Name="adultCount" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="CustomerList">
           <Key>
@@ -251,7 +256,12 @@
           <Property Name="departureTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="arrivalTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="dateCreated" Type="DateTime" Precision="3" />
+          <Property Name="stops" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="saleTotal" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Orders" Relationship="MemberModel.FK_Orders_Cart" FromRole="Cart" ToRole="Order" />
+          <Property Name="number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="carrier" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="adultCount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -364,6 +374,11 @@
           <EntitySetMapping Name="Carts">
             <EntityTypeMapping TypeName="MemberModel.Cart">
               <MappingFragment StoreEntitySet="Cart">
+                <ScalarProperty Name="adultCount" ColumnName="adultCount" />
+                <ScalarProperty Name="carrier" ColumnName="carrier" />
+                <ScalarProperty Name="number" ColumnName="number" />
+                <ScalarProperty Name="saleTotal" ColumnName="saleTotal" />
+                <ScalarProperty Name="stops" ColumnName="stops" />
                 <ScalarProperty Name="dateCreated" ColumnName="dateCreated" />
                 <ScalarProperty Name="arrivalTime" ColumnName="arrivalTime" />
                 <ScalarProperty Name="departureTime" ColumnName="departureTime" />

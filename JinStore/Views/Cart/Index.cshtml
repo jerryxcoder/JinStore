@@ -4,11 +4,116 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Cart</h2>
-@Model.TicketId
-@Model.origin
-@Model.destination
-@Model.departureTime
-@Model.arrivalTime
+<head>
+    <style>
+        .flex-containerBig {
+            width: 100%;
+            height: 700px;
+            flex-flow: column;
+            background-color: #d4d4d4;
+            display: flex;
+            -webkit-flex-direction: column;
+            flex-direction: column;
+         }
 
-@Html.ActionLink("Check Out", "Index", "Checkout", new { id = Model.Id }, null)
+        .flex-containerSmall {
+            display: flex;
+            flex-flow: row;
+        }
+
+        .flex-containerXSmall {
+            display: flex;
+            flex-flow: row;
+         }
+
+        .flex-itemBig {
+            background-color: white;
+            height: auto;
+            margin: 10px;
+        }
+
+        .flex-itemSmall {
+            margin: 10px;
+            padding:12px;
+            background-color:#d2e6c8;
+        }
+         .flex-itemFlight {
+            margin: 10px;
+         }
+        .darkgreenfont {
+            color:darkgreen;
+        }
+        #CarrierImg {
+            max-width: 30px;
+            max-height: 30px;
+        }
+        aside{
+            float:right;
+            width: 30%;
+        }
+        div {
+            display:block;
+        }
+
+    </style>
+</head>
+
+
+<div class="container flex-containerBig">
+
+    <h2 class="col-lg-4" style="color:darkblue"><b>Review your trip</b></h2>
+    <div class="flex-itemSmall col-lg-8">
+        <p class="flex-containerXSmall darkgreenfont"> <b>Thanks for your Choosing ZipLine</b></p>
+        <p class="flex-containerXSmall darkgreenfont"><b>Please review ticket detail before checkout!</b> </p>
+    </div>
+   @using (Html.BeginForm())
+   {
+             <div class="flex-itemBig col-lg-8">
+                 <div class="flex-itemFlight">
+                     <img src="~/img/@(Model.carrier).png" id="CarrierImg"  />
+                 </div>
+                 <div class="flex-itemFlight">
+                       @Model.carrier-@Model.number
+                 </div>
+           
+                <div class="flex-itemFlight">
+                    @Model.origin - @Model.destination
+                </div>
+                <div class="flex-itemFlight">
+                    @Model.departureTime
+                </div>
+                <div class="flex-itemFlight">
+                    @Model.arrivalTime
+                </div>          
+                <div class="flex-itemFlight">
+                    Number of Stops - @Model.stops
+                </div>
+                 <hr>
+                 <article class="flex-itemBig">
+                     <div>
+                         <a href="javascript:history.back()">Change Flight</a>
+                     </div>
+                 </article>
+            </div>
+           
+            <aside>
+                <div class="flex-itemFlight">
+                    @Model.TicketId
+                </div>
+                <div class="flex-itemFlight">
+                    @Model.saleTotal
+                </div>
+                <div class="flex-itemFlight">
+                    Passenger Count: @Model.adultCount
+                </div>
+            </aside>
+
+   }
+    <div class="flex-itemSmall col-lg-8">
+         <p class="flex-containerXSmall darkgreenfont"><b>Free cancellation within 24 hours!</b> </p>
+    </div>
+    <div class="col-lg-4">
+        @Html.ActionLink("Check Out", "Index", "Checkout", new { id = Model.Id }, new { @class = "btn btn-primary" })
+    </div>
+    
+</div>

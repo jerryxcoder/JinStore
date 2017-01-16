@@ -198,6 +198,7 @@
     <Compile Include="Controllers\MembershipController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\ReceiptController.cs" />
     <Compile Include="Controllers\TripsController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -233,6 +234,7 @@
     </Compile>
     <Compile Include="Models\PaymentModel.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\ReceiptModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="App_Start\UserService.cs" />
     <Compile Include="Models\webpages_Membership.cs">
@@ -330,10 +332,10 @@
     <Content Include="Views\Cart\Index.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Contact\Contact.cshtml" />
     <Content Include="Views\Membership\Index.cshtml" />
     <Content Include="Views\Payment\Index.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\Receipt\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

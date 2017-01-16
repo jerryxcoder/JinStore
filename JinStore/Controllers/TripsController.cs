@@ -65,7 +65,8 @@ namespace JinStore.Controllers
         
         [System.Web.Mvc.HttpPut]
         public Guid PutTrip(string id = "", string origin = "", string destination="",
-            string departureTime="",string arrivalTime="")
+            string departureTime="",string arrivalTime="",string saleTotal="",string stops=""
+            ,string number="",string carrier= "", string adultCount="")
         {
             Cart ticket = new Cart();
             ticket.origin = origin;
@@ -73,6 +74,12 @@ namespace JinStore.Controllers
             ticket.destination = destination;
             ticket.departureTime = departureTime;
             ticket.arrivalTime = arrivalTime;
+            ticket.saleTotal = saleTotal;
+            ticket.stops = stops;
+            ticket.carrier = carrier;
+            ticket.number = number;
+            ticket.adultCount = adultCount;         
+
 
             ticket.Id = Guid.NewGuid();
              //TODO: save selected trip details to cart

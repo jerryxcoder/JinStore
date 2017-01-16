@@ -144,18 +144,16 @@ namespace JinStore.Controllers
                         request.Id = entities.CustomerLists.Single(x => x.EmailAddress == model.EmailAddress).ID.ToString();
                     }
                     request.CreditCard = new Braintree.CreditCardRequest();
-                    
-                    
-                    
-                    var customerResult = braintree.Customer.Create(request);
 
+
+                
                     string confirmationUrl = Request.Url.GetLeftPart(UriPartial.Authority) + "/Membership/Confirm?confirmationToken=" + confirmationToken;
                     
                     string sendGridApiKey = ConfigurationManager.AppSettings["SendGrid.ApiKey"];
                     
                     SendGrid.SendGridAPIClient client = new SendGrid.SendGridAPIClient(sendGridApiKey);
                     
-                    Email from = new Email("admin@codingtemple.com");
+                    Email from = new Email("admin@ziplinexcs.com");
                     string subject = "Confirm your new account";
                     Email to = new Email(model.EmailAddress);
                     Content content = new Content("text/html", string.Format("<a href=\"{0}\">Confirm</a>", confirmationUrl));
@@ -166,6 +164,10 @@ namespace JinStore.Controllers
                     var response = await client.client.mail.send.post(requestBody: mail.Get());
                     
                     string message = await response.Body.ReadAsStringAsync();
+                    if (!string.IsNullOrEmpty(message))
+                    {
+                        throw new Exception(message);
+                    }
                     return RedirectToAction("ConfirmationSent");
                 }
             }
@@ -235,6 +237,7 @@ namespace JinStore.Controllers
             return View(model);
         }
 
+        [AllowAnonymous]
         public ActionResult ConfirmationSent()
          {
              return View();

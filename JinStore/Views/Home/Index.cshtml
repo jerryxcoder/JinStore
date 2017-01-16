@@ -46,14 +46,15 @@
             @using (Html.BeginForm("SearchResult", "Products", FormMethod.Get))
             {
                 <h2>Flight Search</h2>
-                <div class="form-group input-group-sm">
+                <label>Origin</label>
+                <div class="form-group input-group-sm">                  
                     <select ng-model="departureCity" id="origin" name="origin">
                         <option ng-repeat="city in trips.trips.data.city" value="{{city.code}}">{{city.name}}</option>
                         <option ng-repeat="airport in trips.trips.data.airport" value="{{airport.code}}">{{airport.name}}</option>
                     </select>
                 </div>
-
-                <div class="form-group input-group-sm">
+                <label>Destination</label>
+                <div class="form-group input-group-sm">                   
                     <select ng-model="arrivalCity" id="destination" name="destination">
                         <option ng-repeat="city in trips.trips.data.city" value="{{city.code}}">{{city.name}}</option>
                         <option ng-repeat="airport in trips.trips.data.airport" value="{{airport.code}}">{{airport.name}}</option>
@@ -61,7 +62,7 @@
                 </div>
 
                 <div class="form-group input-group-sm">
-                    @Html.LabelFor(model => model.departureTime)
+                    <label>Departure Date</label>
                     @Html.TextBoxFor(model => model.departureTime, new { @class = "form-control datepicker", placeholder = "Enter Departure date here..." })
                     @Html.ValidationMessageFor(model => model.departureTime)
                 </div>
@@ -75,7 +76,7 @@
                 <div class="form-group input-group-sm">
                     @Html.DropDownListFor(model => model.adultCount, PassengerNum, "-- Select Number of Passenger --")
                 </div>
-                <input type="submit" value="Submit Order" class="btn btn-primary" />
+                <input type="submit" value="Search" class="btn btn-primary" />
             }         
 
         </div>
@@ -91,36 +92,28 @@
 <div class="container body-content">
     <div class="row">
         <div class="col-md-4">
-            <h2>Getting started</h2>
+            <h2>About ZipLine</h2>
             <p>
-                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-                enables a clean separation of concerns and gives you full control over markup
-                for enjoyable, agile development.
+                ZipLine is a ecommerce website that allow users to search <b>Real Time</b> flight information, 
+                ,purchase flight tickets and manage custoer database.
             </p>
-            <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+            <p><a class="btn btn-default" href="http://localhost:54097/Home/Contact">Learn more &raquo;</a></p>
         </div>
         <div class="col-md-4">
-            <h2>Get more libraries</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+            <h2>ZipLine Technologies</h2>
+            <p>
+                ZipLine is built in <b>ASP.Net Framework</b>, technlogies includes but not limited to <b>
+    Entity framework, SQL Express, Angular JS, Bootstrap,
+    JavaScript, HTML and CSS</b>
+            </p>
+            <p><a class="btn btn-default" href="http://localhost:54097/Home/Contact">Learn more &raquo;</a></p>
         </div>
         <div class="col-md-4">
-            <h2>Web Hosting</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+            <h2>Web APIs</h2>
+            <p>ZipLine intergrate <b>Google QPX API, Braintree API,
+                SmartyStreetAPI, SendGrid</b> to retrieve and validate realtime information</p>
+            <p><a class="btn btn-default" href="http://localhost:54097/Home/Contact">Learn more &raquo;</a></p>
         </div>
+      
     </div>
-</div>
-
-<div class="container body-content">
-    <address>
-        One Microsoft Way<br />
-        Redmond, WA 98052-6399<br />
-        <abbr title="Phone">P:</abbr>
-        425.555.0100
-    </address>
-
-    <address>
-        <strong>Support:</strong>   <a href="mailto:jingangxiao@gmail.com">jingangxiao@gmail.com</a><br />
-    </address>
 </div>

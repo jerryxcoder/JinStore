@@ -74,27 +74,25 @@
 <div class="jumbotron container body-content">
     <div class="well">
         <table class="table">
-            @for (int i = 0; i < Model.CartItem.Length; i++)
-            {
+            
                 <tr>
                     <td>
-                        @Model.CartItem[i].origin
-                        @Html.HiddenFor(x => x.CartItem[i].origin)
+                        @Model.origin
+                        @Html.HiddenFor(x => x.origin)
                     </td>
                     <td>
-                        @Model.CartItem[i].destination
-                        @Html.HiddenFor(x => x.CartItem[i].destination)
+                        @Model.destination
+                        @Html.HiddenFor(x => x.destination)
                     </td>
                     <td>
-                        @Model.CartItem[i].departureTime
-                        @Html.HiddenFor(x => x.CartItem[i].departureTime)
+                        @Model.departureTime
+                        @Html.HiddenFor(x => x.departureTime)
                     </td>
                     <td>
-                        @Model.CartItem[i].arrivalTime
-                        @Html.HiddenFor(x => x.CartItem[i].arrivalTime)
+                        @Model.arrivalTime
+                        @Html.HiddenFor(x => x.arrivalTime)
                     </td>
                 </tr>
-            }
         </table>
     </div>
     @using (Html.BeginForm())
@@ -180,7 +178,7 @@
                 @Html.TextBoxFor(m => m.BillingReceipient, new { @class = "form-control" })
             </div>
         </div>
-
+        @Html.HiddenFor(m => m.id)
         <input type="submit" value="Submit Order" class="btn btn-primary" />
     }
     </div>

@@ -14,6 +14,7 @@ angular.module("JinStore").controller("TripsController", ["$http", "$scope", fun
     var destination = getParameterByName("destination");
     var departureTime = getParameterByName("departureTime");
     var adultCount = getParameterByName("adultCount");
+
     $http.get('/trips.json?origin=' + origin + '&destination=' + destination + '&departureTime=' + departureTime + '&adultCount=' + adultCount).success(function (data) {
         $scope.trips = data;
     });
@@ -35,15 +36,17 @@ angular.module("JinStore").controller("TripController", ["$http", "$scope", func
             "&origin=" + $scope.$parent.x.slice[0].segment[0].leg[0].origin+
             "&destination=" + $scope.$parent.x.slice[0].segment[$scope.$parent.x.slice[0].segment.length - 1].leg[0].destination+
             "&departureTime=" + $scope.$parent.x.slice[0].segment[0].leg[0].departureTime+
-            "&arrivalTime=" + $scope.$parent.x.slice[0].segment[$scope.$parent.x.slice[0].segment.length - 1].leg[0].arrivalTime
-
+            "&arrivalTime=" + $scope.$parent.x.slice[0].segment[$scope.$parent.x.slice[0].segment.length - 1].leg[0].arrivalTime+
+            "&stops="+$scope.$parent.x.slice[0].segment.length+
+            "&saleTotal=" + $scope.$parent.x.saleTotal+
+            "&carrier=" + $scope.$parent.x.slice[0].segment[0].flight.carrier+
+            "&number=" + $scope.$parent.x.slice[0].segment[0].flight.number+
+            "&adultCount=" + $scope.$parent.x.pricing[0].passengers.adultCount
             ).success(function (data) {
                 window.location.assign("/cart/index/" + data);
             });
         //alert("trip selected:" + $scope.$parent.x.id);
     }
-
-
 }]);
 
 

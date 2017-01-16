@@ -10,7 +10,7 @@
         <EntityTypeShape EntityType="MemberModel.webpages_OAuthMembership" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MemberModel.webpages_Roles" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
         <AssociationConnector Association="MemberModel.webpages_UsersInRoles" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="MemberModel.Cart" Width="1.5" PointX="5.375" PointY="2.25" />
+        <EntityTypeShape EntityType="MemberModel.Cart" Width="1.5" PointX="5.375" PointY="2" />
         <EntityTypeShape EntityType="MemberModel.Order" Width="1.5" PointX="7.625" PointY="1.125" />
         <AssociationConnector Association="MemberModel.FK_Orders_Cart" />
         </Diagram>

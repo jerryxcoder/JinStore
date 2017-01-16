@@ -27,6 +27,11 @@ namespace JinStore.Models
         public string departureTime { get; set; }
         public string arrivalTime { get; set; }
         public Nullable<System.DateTime> dateCreated { get; set; }
+        public string stops { get; set; }
+        public string saleTotal { get; set; }
+        public string number { get; set; }
+        public string carrier { get; set; }
+        public string adultCount { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }
