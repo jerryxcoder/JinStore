@@ -15,8 +15,8 @@ namespace JinStore.Models
         public string ticketID { get; set; }
         public string origin { get; set; }
         public string destination { get; set; }
-        public string departureTime { get; set; }
-        public string arrivalTime { get; set; }
+        public DateTime? departureTime { get; set; }
+        public DateTime? arrivalTime { get; set; }
 
         [Required]
         public string FirstName { get; set; }
@@ -53,7 +53,6 @@ namespace JinStore.Models
         [Required]
         public string BillingStreet1 { get; set; }
 
-        [Required]
         public string BillingStreet2 { get; set; }
 
         [Required]

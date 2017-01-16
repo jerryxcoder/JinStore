@@ -13,8 +13,8 @@
           <Property Name="TicketId" Type="nvarchar" MaxLength="50" />
           <Property Name="origin" Type="nvarchar" MaxLength="50" />
           <Property Name="destination" Type="nvarchar" MaxLength="50" />
-          <Property Name="departureTime" Type="nvarchar" MaxLength="50" />
-          <Property Name="arrivalTime" Type="nvarchar" MaxLength="50" />
+          <Property Name="departureTime" Type="datetime" />
+          <Property Name="arrivalTime" Type="datetime" />
           <Property Name="dateCreated" Type="datetime" />
           <Property Name="stops" Type="nchar" MaxLength="10" />
           <Property Name="saleTotal" Type="nvarchar" MaxLength="50" />
@@ -253,15 +253,15 @@
           <Property Name="TicketId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="origin" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="destination" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="departureTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="arrivalTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="departureTime" Type="DateTime" Precision="3" />
+          <Property Name="arrivalTime" Type="DateTime" Precision="3" />
           <Property Name="dateCreated" Type="DateTime" Precision="3" />
           <Property Name="stops" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="saleTotal" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Orders" Relationship="MemberModel.FK_Orders_Cart" FromRole="Cart" ToRole="Order" />
           <Property Name="number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="carrier" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="adultCount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Orders" Relationship="MemberModel.FK_Orders_Cart" FromRole="Cart" ToRole="Order" />
         </EntityType>
         <EntityType Name="Order">
           <Key>

@@ -46,9 +46,9 @@
                  <form ng-submit="tripSelect()" ng-controller="TripController">
                      <div class="flex-containerSmall">
                          <img src="~/img/{{x.slice[0].segment[0].flight.carrier }}.png" id="CarrierImg" class="flex-containerSmall flex-itemSmall" />
-                         <div class="flex-itemSmall">{{x.slice[0].segment[0].leg[0].departureTime }}</div>
-                         <div class="flex-itemSmall">{{x.slice[0].segment[x.slice[0].segment.length-1].leg[0].arrivalTime }}</div>
-                         <div class="flex-itemSmall">{{x.slice[0].duration}}</div>
+                         <div class="flex-itemSmall">{{x.slice[0].segment[0].leg[0].departureTime | date:'MM/dd/yyyy h:mma'}}</div>
+                         <div class="flex-itemSmall">{{x.slice[0].segment[x.slice[0].segment.length-1].leg[0].arrivalTime | date:'MM/dd/yyyy h:mma'}}</div>
+                         <div class="flex-itemSmall">{{x.slice[0].duration / 60 | number:0}} hours </div>
                          <div class="flex-itemSmall">{{x.slice[0].segment[0].flight.carrier }}{{x.slice[0].segment[0].flight.number }}</div>
                          <div class="flex-itemSmall">{{x.saleTotal}}</div>
                      </div>

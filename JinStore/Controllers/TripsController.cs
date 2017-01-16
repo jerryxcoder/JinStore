@@ -72,8 +72,8 @@ namespace JinStore.Controllers
             ticket.origin = origin;
             ticket.TicketId = id;
             ticket.destination = destination;
-            ticket.departureTime = departureTime;
-            ticket.arrivalTime = arrivalTime;
+            ticket.departureTime = DateTime.Parse(departureTime);
+            ticket.arrivalTime = DateTime.Parse(arrivalTime);
             ticket.saleTotal = saleTotal;
             ticket.stops = stops;
             ticket.carrier = carrier;
@@ -82,9 +82,11 @@ namespace JinStore.Controllers
 
 
             ticket.Id = Guid.NewGuid();
+
              //TODO: save selected trip details to cart
             using (MemberEntities1 entities = new MemberEntities1())
             {
+                
                 entities.Carts.Add(ticket);
                 entities.SaveChanges();
             }

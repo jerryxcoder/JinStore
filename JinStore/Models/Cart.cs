@@ -24,8 +24,8 @@ namespace JinStore.Models
         public string TicketId { get; set; }
         public string origin { get; set; }
         public string destination { get; set; }
-        public string departureTime { get; set; }
-        public string arrivalTime { get; set; }
+        public Nullable<System.DateTime> departureTime { get; set; }
+        public Nullable<System.DateTime> arrivalTime { get; set; }
         public Nullable<System.DateTime> dateCreated { get; set; }
         public string stops { get; set; }
         public string saleTotal { get; set; }
