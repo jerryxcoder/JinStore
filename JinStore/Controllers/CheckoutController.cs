@@ -36,6 +36,8 @@ namespace JinStore.Controllers
                 model2.destination = order.destination;
                 model2.departureTime = order.departureTime;
                 model2.arrivalTime = order.arrivalTime;
+                model2.saleTotal = order.saleTotal;
+                model2.stops = order.stops;
                 //model2.CartItem = order.Cart.se(x => new CartModel
                 //{
                 //    origin = x.origin,
@@ -114,43 +116,96 @@ namespace JinStore.Controllers
                         string merchantId = ConfigurationManager.AppSettings["Braintree.MerchantId"];
 
                         Braintree.BraintreeGateway braintree = new Braintree.BraintreeGateway(environment, merchantId, publicKey, privateKey);
-                        Braintree.CustomerRequest request = new Braintree.CustomerRequest();
-                        request.Email = model2.EmailAddress;
-                        request.FirstName = model2.FirstName;
-                        request.LastName = model2.LastName;
-                        request.Phone = model2.PhoneNumber;
-                        request.CreditCard = new Braintree.CreditCardRequest();
 
-                        request.CreditCard.Number = model2.CreditCardNumber;
-                        request.CreditCard.CardholderName = model2.CreditCardName;
-                        request.CreditCard.ExpirationMonth = (model2.CreditCardExpirationMonth).ToString().PadLeft(2, '0');
-                        request.CreditCard.ExpirationYear = model2.CreditCardExpirationYear.ToString();
+                        int userId = -1;
+                        if (string.IsNullOrEmpty(User.Identity.Name))
+                        {
+                            userId = 34;
 
+                            var customer = braintree.Customer.Find(userId.ToString());
 
-                        var customerResult = braintree.Customer.Create(request);
-                        Braintree.TransactionRequest sale = new Braintree.TransactionRequest();
-                        sale.Amount = decimal.Parse(cart.saleTotal.Replace("USD", string.Empty));
-                        sale.CustomerId = customerResult.Target.Id;
-                        sale.PaymentMethodToken = customerResult.Target.DefaultPaymentMethod.Token;
-                        braintree.Transaction.Sale(sale);
+                            Braintree.CustomerRequest request = new Braintree.CustomerRequest();
+
+                            request.CreditCard = new Braintree.CreditCardRequest();
+
+                            request.CreditCard.Number = model2.CreditCardNumber;
+                            request.CreditCard.CardholderName = model2.CreditCardName;
+                            request.CreditCard.ExpirationMonth = (model2.CreditCardExpirationMonth).ToString().PadLeft(2, '0');
+                            request.CreditCard.ExpirationYear = model2.CreditCardExpirationYear.ToString();
 
 
-                        o.FirstName = model2.FirstName;
-                        o.LastName = model2.LastName;
-                        o.EmailAddress = model2.EmailAddress;
-                        o.PhoneNumber = model2.PhoneNumber;
+                            var customerResult = braintree.Customer.Update(userId.ToString(), request);
 
-                        o.BillingCity = model2.BillingCity;
-                        o.BillingPostalCode = model2.BillingPostalCode;
-                        o.BillingReceipient = model2.BillingReceipient;
-                        o.BillingStreet1 = model2.BillingStreet1;
-                        o.BillingStreet2 = model2.BillingStreet2;
-                        o.BillingState = model2.BillingState;
-                        o.DateCreated = DateTime.UtcNow;
-                        o.DateLastModified = DateTime.UtcNow;
-                        entities.SaveChanges();
+                            Braintree.TransactionRequest sale = new Braintree.TransactionRequest();
+                            sale.Amount = decimal.Parse(cart.saleTotal.Replace("USD", string.Empty));
+                            sale.CustomerId = customerResult.Target.Id;
+                            sale.PaymentMethodToken = customerResult.Target.DefaultPaymentMethod.Token;
+                            braintree.Transaction.Sale(sale);
 
-                        return RedirectToAction("Index", "Receipt", new { id = o.OrderId });
+
+                            o.FirstName = model2.FirstName;
+                            o.LastName = model2.LastName;
+                            o.EmailAddress = model2.EmailAddress;
+                            o.PhoneNumber = model2.PhoneNumber;
+
+                            o.BillingCity = model2.BillingCity;
+                            o.BillingPostalCode = model2.BillingPostalCode;
+                            o.BillingReceipient = model2.BillingReceipient;
+                            o.BillingStreet1 = model2.BillingStreet1;
+                            o.BillingStreet2 = model2.BillingStreet2;
+                            o.BillingState = model2.BillingState;
+                            o.DateCreated = DateTime.UtcNow;
+                            o.DateLastModified = DateTime.UtcNow;
+                            entities.SaveChanges();
+
+                            return RedirectToAction("Index", "Receipt", new { id = o.OrderId });
+                        }
+                        else
+                        {
+                            using (MemberEntities1 e = new MemberEntities1())
+                            {
+
+                                userId = e.CustomerLists.Single(x => x.EmailAddress == User.Identity.Name).ID;
+
+                            }
+                            var customer = braintree.Customer.Find(userId.ToString());
+
+                            Braintree.CustomerRequest request = new Braintree.CustomerRequest();
+
+                            request.CreditCard = new Braintree.CreditCardRequest();
+
+                            request.CreditCard.Number = model2.CreditCardNumber;
+                            request.CreditCard.CardholderName = model2.CreditCardName;
+                            request.CreditCard.ExpirationMonth = (model2.CreditCardExpirationMonth).ToString().PadLeft(2, '0');
+                            request.CreditCard.ExpirationYear = model2.CreditCardExpirationYear.ToString();
+
+
+                            var customerResult = braintree.Customer.Update(userId.ToString(), request);
+
+                            Braintree.TransactionRequest sale = new Braintree.TransactionRequest();
+                            sale.Amount = decimal.Parse(cart.saleTotal.Replace("USD", string.Empty));
+                            sale.CustomerId = customerResult.Target.Id;
+                            sale.PaymentMethodToken = customerResult.Target.DefaultPaymentMethod.Token;
+                            braintree.Transaction.Sale(sale);
+
+
+                            o.FirstName = model2.FirstName;
+                            o.LastName = model2.LastName;
+                            o.EmailAddress = model2.EmailAddress;
+                            o.PhoneNumber = model2.PhoneNumber;
+
+                            o.BillingCity = model2.BillingCity;
+                            o.BillingPostalCode = model2.BillingPostalCode;
+                            o.BillingReceipient = model2.BillingReceipient;
+                            o.BillingStreet1 = model2.BillingStreet1;
+                            o.BillingStreet2 = model2.BillingStreet2;
+                            o.BillingState = model2.BillingState;
+                            o.DateCreated = DateTime.UtcNow;
+                            o.DateLastModified = DateTime.UtcNow;
+                            entities.SaveChanges();
+
+                            return RedirectToAction("Index", "Receipt", new { id = o.OrderId });
+                        }
                     }
 
                 }

@@ -55,10 +55,11 @@ namespace JinStore.Models
         [EmailAddress]
         [Display(Name = "Email")]
         public string EmailAddress { get; set; }
-        public string Fax { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Phone { get; set; }
+        public string saleTotal { get; set; }
+        public string Fax { get; set; }
         public string Website { get; set; }
     }
 }

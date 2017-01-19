@@ -143,7 +143,7 @@ namespace JinStore.Controllers
                     {
                         request.Id = entities.CustomerLists.Single(x => x.EmailAddress == model.EmailAddress).ID.ToString();
                     }
-                    request.CreditCard = new Braintree.CreditCardRequest();
+                    braintree.Customer.Create(request);
 
 
                 

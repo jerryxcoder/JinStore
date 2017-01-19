@@ -17,6 +17,8 @@ namespace JinStore.Models
         public string destination { get; set; }
         public DateTime? departureTime { get; set; }
         public DateTime? arrivalTime { get; set; }
+        public string saleTotal { get; set; }
+        public string stops { get; set; }
 
         [Required]
         public string FirstName { get; set; }

@@ -3,6 +3,90 @@
 @{
     ViewBag.Title="Receipt";
 }
-@Model.FirstName
-@Model.LastName
-@Model.saleTotal
+
+<head>
+    <style>
+        .flex-containerBig {
+            width: 100%;
+            height: 700px;
+            flex-flow: column;
+            background-color: #d4d4d4;
+            display: flex;
+            -webkit-flex-direction: column;
+            flex-direction: column;
+        }
+
+        .flex-containerSmall {
+            display: flex;
+            flex-flow: row;
+        }
+
+        .flex-containerXSmall {
+            display: flex;
+            flex-flow: row;
+        }
+
+        .flex-itemBig {
+            background-color: white;
+            height: auto;
+            margin: 10px;
+        }
+
+        .flex-itemSmall {
+            margin: 10px;
+            padding: 12px;
+            background-color: #d2e6c8;
+        }
+
+        .flex-itemFlight {
+            margin: 10px;
+        }
+
+        .darkgreenfont {
+            color: darkgreen;
+        }
+
+        #CarrierImg {
+            max-width: 30px;
+            max-height: 30px;
+        }
+
+        aside {
+            float: right;
+            width: 30%;
+        }
+
+        div {
+            display: block;
+        }
+    </style>
+</head>
+<div class="container flex-containerBig">
+
+    <h2 class="col-lg-4" style="color:darkblue"><b>Flight Invoice</b></h2>
+    <div class="flex-itemBig col-lg-8">
+        <div class="flex-itemFlight">
+            <img src="~/img/@(Model.carrier).png" id="CarrierImg" />
+            @Model.carrier-@Model.number
+        </div>
+        <div class="flex-itemFlight">
+            @Model.origin - @Model.destination
+        </div>
+        <div class="flex-itemFlight">
+            @Model.departureTime
+        </div>
+        <div class="flex-itemFlight">
+            @Model.arrivalTime
+        </div>
+        <div class="flex-itemFlight">
+            Stops: @Model.stops
+        </div>
+        <div class="flex-itemFlight">
+            @Model.FirstName @Model.LastName
+        </div>
+        <div class="flex-itemFlight">
+            Total: @Model.saleTotal
+        </div>
+    </div>
+    
+</div>
